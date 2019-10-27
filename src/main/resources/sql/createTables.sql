@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS trips(
+  trip_id INT AUTO_INCREMENT PRIMARY KEY ,
+  start_time VARCHAR(5) NOT NULL,
+  duration INT NOT NULL
+  );
+
+CREATE TABLE IF NOT EXISTS depots(
+  depot_id INT AUTO_INCREMENT PRIMARY KEY ,
+  name VARCHAR(255) NOT NULL,
+  capacity INT NOT NULL
+  );
