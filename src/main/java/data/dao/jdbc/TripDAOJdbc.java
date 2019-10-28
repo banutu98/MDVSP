@@ -1,14 +1,13 @@
 package data.dao.jdbc;
 
-import data.dao.Models.Trip;
+import data.dao.models.Trip;
 import data.dao.spec.TripDAO;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripDAOJdbc implements TripDAO {
 
@@ -47,6 +46,30 @@ public class TripDAOJdbc implements TripDAO {
         }
 
         return result;
+    }
+
+    @Override
+    public List<Trip> readAll() {
+        List<Trip> resultList = new ArrayList<>();
+        try (PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM trips")) {
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+            while (rs.next()) {
+                Trip result = new Trip();
+                result.setId(rs.getInt(1));
+                String[] time = rs.getString(2).split(":");
+                result.setStartTime(LocalTime.of(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
+                result.setDuration(rs.getInt(3));
+                result.setEndTime(result.getStartTime().plusMinutes(result.getDuration()));
+                resultList.add(result);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultList;
     }
 
     @Override

@@ -1,12 +1,14 @@
 package data.dao.jdbc;
 
-import data.dao.Models.Depot;
+import data.dao.models.Depot;
 import data.dao.spec.DepotDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DepotDAOJdbc implements DepotDAO {
 
@@ -42,6 +44,26 @@ public class DepotDAOJdbc implements DepotDAO {
         }
 
         return result;
+    }
+
+    @Override
+    public List<Depot> readAll() {
+        List<Depot> resultList = new ArrayList<>();
+        try (PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM depots")) {
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+            while (rs.next()) {
+                Depot result = new Depot();
+                result.setId(rs.getInt(1));
+                result.setName(rs.getString(2));
+                result.setCapacity(rs.getInt(3));
+                resultList.add(result);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultList;
     }
 
     @Override

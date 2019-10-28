@@ -1,4 +1,4 @@
-package data.dao.Models;
+package data.dao.models;
 
 import java.time.LocalTime;
 

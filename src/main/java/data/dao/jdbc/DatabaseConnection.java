@@ -17,9 +17,9 @@ public class DatabaseConnection {
 
     private DatabaseConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        final String URL = "jdbc:mysql://localhost:3306/mdvsp";
-        final String USER = "root";
-        final String PASS = "admin";
+        final String URL = "jdbc:mysql://localhost:3306/mysql";
+        final String USER = "banutu98";
+        final String PASS = "@Psusrem#41E0K";
         conn = DriverManager.getConnection(URL, USER, PASS);
     }
 
