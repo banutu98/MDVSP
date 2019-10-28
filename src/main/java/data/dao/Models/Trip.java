@@ -47,6 +47,12 @@ public class Trip {
         this.duration = duration;
     }
 
+    public Trip(LocalTime startTime, LocalTime endTime, int duration) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.duration = duration;
+    }
+
     public Trip() {
     }
 }
