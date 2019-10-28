@@ -19,7 +19,7 @@ public class DatabaseConnection {
         Class.forName("com.mysql.jdbc.Driver");
         final String URL = "jdbc:mysql://localhost:3306/mysql";
         final String USER = "banutu98";
-        final String PASS = "@Psusrem#41E0K";
+        final String PASS = "";
         conn = DriverManager.getConnection(URL, USER, PASS);
     }
 
