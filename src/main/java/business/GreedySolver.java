@@ -11,8 +11,6 @@ import data.dao.spec.DepotDAO;
 
 import java.util.*;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
-
 public class GreedySolver implements SolverStrategy {
     @Override
     public List<Pair<Trip, Depot>> solve() {

@@ -1,10 +1,10 @@
 package data.generators;
 
 import com.github.javafaker.Faker;
-import data.dao.Models.Depot;
-import data.dao.Models.Trip;
 import data.dao.jdbc.DepotDAOJdbc;
 import data.dao.jdbc.TripDAOJdbc;
+import data.dao.models.Depot;
+import data.dao.models.Trip;
 import data.dao.spec.DepotDAO;
 import data.dao.spec.TripDAO;
 
