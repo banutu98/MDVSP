@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" xml:lang="en" lang="en">
+<h:head>
+    <title>
+        <h:outputText value="#{label['tripsTitle']}"/>
+    </title>
+</h:head>
+<body>
+<h:form id="tripsForm">
+    <ui:repeat value="#{tripsBean.trips}" var="trip" varStatus="tripStatus">
+        <h:outputText value="#{label['startTime']}"/> <br/>
+        <pe:timePicker value="#{tripsBean.startTimes[tripStatus.index]}" widgetVar="spinnerTimeWidget"/> <br/>
+        <h:outputText value="#{label['endTime']}"/> <br/>
+        <pe:timePicker value="#{tripsBean.endTimes[tripStatus.index]}" widgetVar="spinnerTimeWidget"/> <br/>
+    </ui:repeat>
+    <p:commandButton value="#{label['add']}" update="tripsForm" action="#{tripsBean.addListener()}"/><br/><br/>
+    <p:commandButton value="#{label['remove']}" update="tripsForm" action="#{tripsBean.removeListener()}"/><br/><br/>
+    <p:commandButton value="#{label['submit']}" action="#{tripsBean.submitListener()}"/><br/><br/>
+    <h:messages id="messages" style = "color:red;margin:8px;" />
+    <h:messages globalOnly="true"/>
+</h:form>
+</body>
+</html>
