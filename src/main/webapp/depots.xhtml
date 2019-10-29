@@ -3,19 +3,30 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       xml:lang="en" lang="en">
-<head>
+<h:head>
     <title>
         <h:outputText value="#{label['depotsTitle']}"/>
     </title>
-</head>
+</h:head>
 <body>
-    <h:form>
+<h:form id="depotForm">
+    <p:messages showDetail="true" closable="true">
+        <p:autoUpdate/>
+    </p:messages>
+    <ui:repeat value="#{depotsBean.depots}" var="depot">
         <h:outputText value="#{label['name']}"/> <br/>
-        <p:inputText required="true" /> <br/>
+        <p:inputText required="true" value="#{depot.name}"/> <br/>
         <h:outputText value="#{label['capacity']}"/> <br/>
-        <p:inputNumber minValue="0" decimalPlaces="0"/> <br/>
-        <p:commandButton value="#{label['submit']}"/>
-    </h:form>
+        <p:inputNumber minValue="1" decimalPlaces="0" value="#{depot.capacity}"/> <br/>
+    </ui:repeat>
+    <p:commandButton value="#{label['add']}" update="depotForm" action="#{depotsBean.addListener()}"/><br/><br/>
+    <p:commandButton value="#{label['remove']}" update="depotForm" action="#{depotsBean.removeListener()}"/><br/><br/>
+    <p:commandButton id="submit" value="#{label['submit']}" action="#{depotsBean.submitListener()}"/><br/><br/>
+    <p:message for="submit" display="text"/>
+    <h:messages id="messages" style = "color:red;margin:8px;" />
+</h:form>
 </body>
 </html>
