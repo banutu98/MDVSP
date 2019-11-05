@@ -72,7 +72,7 @@ public class TabuSolver implements SolverStrategy {
     private double[][] initGraph() {
         AssociationDAO associationDAO = new AssociationDAOJdbc();
         List<Association> associations = associationDAO.readAll();
-        double[][] graph = new double[associations.size()][associations.size()];
+        double[][] graph = new double[associations.size() + 1][associations.size() + 1];
         for (int i = 0; i < associations.size(); i++)
             for (int j = 0; j < associations.size(); j++) {
                 if (i == j)
