@@ -1,6 +1,7 @@
 package presentation.backingBeans;
 
 import business.GreedySolver;
+import business.TabuSolver;
 import data.dao.models.Depot;
 import data.dao.models.Trip;
 import javafx.util.Pair;
@@ -18,7 +19,7 @@ public class ScheduleBean {
     }
 
     public ScheduleBean() {
-        this.schedule = new GreedySolver().solve();
+        this.schedule = new TabuSolver().solve();
     }
 
     public void setSchedule(List<Pair<Trip, Depot>> schedule) {

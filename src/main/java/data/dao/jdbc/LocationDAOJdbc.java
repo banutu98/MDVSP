@@ -33,8 +33,7 @@ public class LocationDAOJdbc implements LocationDAO {
             pstmt.setInt(1, id);
             pstmt.execute();
             ResultSet rs = pstmt.getResultSet();
-            if (rs != null) {
-                rs.next();
+            if (rs != null && rs.next()) {
                 result.setId(id);
                 result.setX(rs.getDouble(2));
                 result.setY(rs.getDouble(3));
