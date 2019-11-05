@@ -9,6 +9,7 @@ public interface DepotDAO {
     void create(Depot depot);
 
     Depot read(int id);
+
     List<Depot> readAll();
 
     void update(Depot depot);
