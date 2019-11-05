@@ -11,6 +11,10 @@
     </title>
 </h:head>
 <body>
+<ui:insert name="header">
+    <ui:include src="header.xhtml"/>
+</ui:insert>
+<br/>
 <h:form id="tripsForm">
     <ui:repeat value="#{tripsBean.trips}" var="trip" varStatus="tripStatus">
         <h:outputText value="#{label['startTime']}"/> <br/>
@@ -24,5 +28,9 @@
     <h:messages id="messages" style = "color:red;margin:8px;" />
     <h:messages globalOnly="true"/>
 </h:form>
+<br/>
+<ui:insert name="footer">
+    <ui:include src="footer.xhtml"/>
+</ui:insert>
 </body>
 </html>
