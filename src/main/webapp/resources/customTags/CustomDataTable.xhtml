@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xml:lang="en" lang="en">
+<body>
+<composite:interface>
+    <composite:attribute name="tableName"/>
+    <composite:attribute name="editable"/>
+</composite:interface>
+
+
+<composite:implementation>
+    <h:form id="form">
+        <p:dataTable var="row" value="#{dataTableBean.getRows(cc.attrs.tableName)}" editable="#{cc.attrs.editable}"
+                     editMode="cell">
+            <p:columns var="columnName" value="#{dataTableBean.getColumns(cc.attrs.tableName)}"
+                       columnIndexVar="colIndex">
+                <f:facet name="header">
+                    <h:outputText value="#{columnName}"/>
+                </f:facet>
+                <h:outputText value="#{row[colIndex]}"/>
+            </p:columns>
+        </p:dataTable>
+
+        <p:commandButton value="#{label['add']}" action="#{dataTableBean.addRow()}" update="form" rendered="#{cc.attrs.editable}"/><br/>
+        <p:commandButton value="#{label['remove']}" action="#{dataTableBean.removeRow}" update="form" rendered="#{cc.attrs.editable}"/><br/>
+        <p:commandButton value="#{label['submit']}" action="#{dataTableBean.submit}" rendered="#{cc.attrs.editable}"/><br/>
+    </h:form>
+</composite:implementation>
+</body>
+</html>
