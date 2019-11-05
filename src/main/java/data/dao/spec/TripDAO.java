@@ -9,6 +9,7 @@ public interface TripDAO {
     void create(Trip trip);
 
     Trip read(int id);
+
     List<Trip> readAll();
 
     void update(Trip trip);
