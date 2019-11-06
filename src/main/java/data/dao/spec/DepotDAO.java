@@ -16,4 +16,6 @@ public interface DepotDAO {
 
     void delete(int id);
 
+    void deleteAll();
+
 }

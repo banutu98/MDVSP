@@ -15,4 +15,6 @@ public interface AssociationDAO {
     void update(Association association);
 
     void delete(Association association);
+
+    void deleteAll();
 }

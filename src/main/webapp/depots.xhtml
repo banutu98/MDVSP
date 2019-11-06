@@ -12,10 +12,12 @@
     </title>
 </h:head>
 <body>
-<ui:insert name="header">
-    <ui:include src="header.xhtml"/>
-</ui:insert>
-<br/>
+<h:form>
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+    <br/>
+</h:form>
 <h:form id="depotForm">
     <p:messages showDetail="true" closable="true">
         <p:autoUpdate/>
@@ -30,7 +32,7 @@
     <p:commandButton value="#{label['remove']}" update="depotForm" action="#{depotsBean.removeListener()}"/><br/><br/>
     <p:commandButton id="submit" value="#{label['submit']}" action="#{depotsBean.submitListener()}"/><br/><br/>
     <p:message for="submit" display="text"/>
-    <h:messages id="messages" style = "color:red;margin:8px;" />
+    <h:messages id="messages" style="color:red;margin:8px;"/>
 </h:form>
 <br/>
 <ui:insert name="footer">

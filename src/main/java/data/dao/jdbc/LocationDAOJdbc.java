@@ -82,10 +82,19 @@ public class LocationDAOJdbc implements LocationDAO {
 
     @Override
     public void delete(int id) {
-        try(PreparedStatement pstmt = connection.prepareStatement("DELETE FROM locations WHERE location_id = ?")){
+        try (PreparedStatement pstmt = connection.prepareStatement("DELETE FROM locations WHERE location_id = ?")) {
             pstmt.setInt(1, id);
             pstmt.execute();
-        }catch (SQLException e){
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteAll() {
+        try (PreparedStatement pstmt = connection.prepareStatement("DELETE FROM locations")) {
+            pstmt.execute();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

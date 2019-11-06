@@ -94,6 +94,16 @@ public class TripDAOJdbc implements TripDAO {
         }
     }
 
+
+    @Override
+    public void deleteAll() {
+        try (PreparedStatement pstmt = connection.prepareStatement("DELETE FROM trips")) {
+            pstmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public TripDAOJdbc() {
         try {
             connection = DatabaseConnection.getInstance().getConn();

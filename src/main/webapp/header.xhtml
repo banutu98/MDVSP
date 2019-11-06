@@ -4,17 +4,17 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en">
-<head>
-    <ui:composition>
-        <h1><h:outputText value="#{label['title']}"/></h1>
-        <br/>
-        <ui:insert name="menu">
-            <ui:include src="menu.xhtml"/>
-        </ui:insert>
-        <br/>
-    </ui:composition>
-</head>
-<body>
+<h:head>
 
+</h:head>
+<body>
+<ui:composition>
+    <h1><h:outputText value="#{label['title']}"/></h1>
+    <br/>
+    <ui:insert name="menu">
+        <ui:include src="menu.xhtml"/>
+    </ui:insert>
+    <br/>
+</ui:composition>
 </body>
 </html>

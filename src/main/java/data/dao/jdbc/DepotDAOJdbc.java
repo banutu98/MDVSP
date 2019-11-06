@@ -88,6 +88,15 @@ public class DepotDAOJdbc implements DepotDAO {
         }
     }
 
+    @Override
+    public void deleteAll() {
+        try(PreparedStatement pstmt = connection.prepareStatement("DELETE FROM depots")){
+            pstmt.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public DepotDAOJdbc() {
         try {
             connection = DatabaseConnection.getInstance().getConn();
