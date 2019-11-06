@@ -16,5 +16,6 @@ public interface LocationDAO {
 
     void delete(int id);
 
+    void deleteAll();
 
 }

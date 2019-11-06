@@ -13,21 +13,33 @@
 
 
 <composite:implementation>
-    <h:form id="form">
+    <h:form id="dataForm">
         <p:dataTable var="row" value="#{dataTableBean.getRows(cc.attrs.tableName)}" editable="#{cc.attrs.editable}"
                      editMode="cell">
+            <p:ajax event="cellEdit" listener="#{dataTableBean.onCellEdit}" />
             <p:columns var="columnName" value="#{dataTableBean.getColumns(cc.attrs.tableName)}"
                        columnIndexVar="colIndex">
                 <f:facet name="header">
                     <h:outputText value="#{columnName}"/>
                 </f:facet>
-                <h:outputText value="#{row[colIndex]}"/>
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{row[colIndex]}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{row[colIndex]}" validator="#{dataTableBean.validateLocation}" validatorMessage="#{label['validatorMessage']}"/>
+                    </f:facet>
+                </p:cellEditor>
             </p:columns>
         </p:dataTable>
 
-        <p:commandButton value="#{label['add']}" action="#{dataTableBean.addRow()}" update="form" rendered="#{cc.attrs.editable}"/><br/>
-        <p:commandButton value="#{label['remove']}" action="#{dataTableBean.removeRow}" update="form" rendered="#{cc.attrs.editable}"/><br/>
-        <p:commandButton value="#{label['submit']}" action="#{dataTableBean.submit}" rendered="#{cc.attrs.editable}"/><br/>
+        <p:commandButton value="#{label['add']}" action="#{dataTableBean.addRow()}" update="dataForm"
+                         rendered="#{cc.attrs.editable}"/><br/><br/>
+        <p:commandButton value="#{label['remove']}" action="#{dataTableBean.removeRow()}" update="dataForm"
+                         rendered="#{cc.attrs.editable}"/><br/><br/>
+        <p:commandButton value="#{label['submit']}" action="#{dataTableBean.submit(cc.attrs.tableName)}"
+                         rendered="#{cc.attrs.editable}" /><br/><br/>
+        <h:messages id="messages" style = "color:red;margin:8px;" />
     </h:form>
 </composite:implementation>
 </body>

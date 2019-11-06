@@ -98,6 +98,15 @@ public class AssociationDAOJdbc implements AssociationDAO {
         }
     }
 
+    @Override
+    public void deleteAll() {
+        try(PreparedStatement pstmt = connection.prepareStatement("DELETE FROM associations")){
+            pstmt.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public AssociationDAOJdbc() {
         try {
             connection = DatabaseConnection.getInstance().getConn();

@@ -11,10 +11,12 @@
     </title>
 </h:head>
 <body>
-<ui:insert name="header">
-    <ui:include src="header.xhtml"/>
-</ui:insert>
-<br/>
+<h:form>
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+    <br/>
+</h:form>
 <h:form id="tripsForm">
     <ui:repeat value="#{tripsBean.trips}" var="trip" varStatus="tripStatus">
         <h:outputText value="#{label['startTime']}"/> <br/>

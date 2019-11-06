@@ -11,10 +11,12 @@
     </title>
 </h:head>
 <body>
-<ui:insert name="header">
-    <ui:include src="header.xhtml"/>
-</ui:insert>
-<br/>
+<h:form>
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+    <br/>
+</h:form>
 <h:form enctype="multipart/form-data">
     <p:fileUpload value="#{uploadBean.file}" mode="simple" skinSimple="true"/>
 
@@ -25,7 +27,7 @@
 
     <h:outputLabel value="#{label.orLabel}"/> <br/> <br/>
 
-    <p:commandButton value="#{label.manualSubmit}" action="#{uploadBean.goToDepotPage}" />
+    <p:commandButton value="#{label.manualSubmit}" action="#{uploadBean.goToDepotPage}"/>
 </h:form>
 <br/>
 <ui:insert name="footer">

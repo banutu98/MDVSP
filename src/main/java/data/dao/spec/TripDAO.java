@@ -15,4 +15,6 @@ public interface TripDAO {
     void update(Trip trip);
 
     void delete(int id);
+
+    void deleteAll();
 }
