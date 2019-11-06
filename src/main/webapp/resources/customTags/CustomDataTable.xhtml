@@ -15,7 +15,7 @@
 <composite:implementation>
     <h:form id="dataForm">
         <p:dataTable var="row" value="#{dataTableBean.getRows(cc.attrs.tableName)}" editable="#{cc.attrs.editable}"
-                     editMode="cell">
+                     editMode="cell" scrollable="true" scrollHeight="150">
             <p:ajax event="cellEdit" listener="#{dataTableBean.onCellEdit}" />
             <p:columns var="columnName" value="#{dataTableBean.getColumns(cc.attrs.tableName)}"
                        columnIndexVar="colIndex">

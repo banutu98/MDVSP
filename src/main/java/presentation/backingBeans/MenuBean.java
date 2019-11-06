@@ -15,7 +15,7 @@ public class MenuBean {
         return "dataEdit";
     }
 
-    public String goToLonely() {
-        return "lonely";
+    public String goToSchedule() {
+        return "schedule";
     }
 }
