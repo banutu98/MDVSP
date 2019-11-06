@@ -20,6 +20,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,36 +115,41 @@ public class CustomDataTableBean {
     }
 
     public String submit(String table) {
-        if (table.equalsIgnoreCase("depots")) {
-            DepotDAO depotDAO = new DepotDAOJdbc();
-            depotDAO.deleteAll();
-            for (String[] row : rows) {
-                depotDAO.create(createDepot(row));
+        try {
+            if (table.equalsIgnoreCase("depots")) {
+                DepotDAO depotDAO = new DepotDAOJdbc();
+                depotDAO.deleteAll();
+                for (String[] row : rows) {
+                    depotDAO.create(createDepot(row));
+                }
+            }
+
+            if (table.equalsIgnoreCase("locations")) {
+                LocationDAO locationDAO = new LocationDAOJdbc();
+                locationDAO.deleteAll();
+                for (String[] row : rows) {
+                    locationDAO.create(createLocation(row));
+                }
+            }
+
+            if (table.equalsIgnoreCase("trips")) {
+                TripDAO tripDAO = new TripDAOJdbc();
+                tripDAO.deleteAll();
+                for (String[] row : rows) {
+                    tripDAO.create(createTrip(row));
+                }
+            }
+
+            if (table.equalsIgnoreCase("associations")) {
+                AssociationDAO associationDAO = new AssociationDAOJdbc();
+                associationDAO.deleteAll();
+                for (String[] row : rows) {
+                    associationDAO.create(createAssociation(row));
+                }
             }
         }
-
-        if (table.equalsIgnoreCase("locations")) {
-            LocationDAO locationDAO = new LocationDAOJdbc();
-            locationDAO.deleteAll();
-            for (String[] row : rows) {
-                locationDAO.create(createLocation(row));
-            }
-        }
-
-        if (table.equalsIgnoreCase("trips")) {
-            TripDAO tripDAO = new TripDAOJdbc();
-            tripDAO.deleteAll();
-            for (String[] row : rows) {
-                tripDAO.create(createTrip(row));
-            }
-        }
-
-        if (table.equalsIgnoreCase("associations")) {
-            AssociationDAO associationDAO = new AssociationDAOJdbc();
-            associationDAO.deleteAll();
-            for (String[] row : rows) {
-                associationDAO.create(createAssociation(row));
-            }
+        catch (NumberFormatException | DateTimeException e){
+            return "failure";
         }
 
         return "success";

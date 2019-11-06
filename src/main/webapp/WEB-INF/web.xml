@@ -33,4 +33,12 @@
         <param-value>*.xhtml</param-value>
     </context-param>-->
 
+    <listener>
+        <listener-class>presentation.listeners.SessionCounter</listener-class>
+    </listener>
+
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
 </web-app>
