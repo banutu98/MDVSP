@@ -99,6 +99,23 @@ public class LocationDAOJdbc implements LocationDAO {
         }
     }
 
+    @Override
+    public int getId(Location location) {
+        try(PreparedStatement pstmt = connection.prepareStatement("SELECT location_id FROM locations WHERE x = ? AND y = ?")){
+            pstmt.setDouble(1, location.getX());
+            pstmt.setDouble(2, location.getY());
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+            if(rs != null && rs.next()){
+                return rs.getInt(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
     public LocationDAOJdbc() {
         try {
             connection = DatabaseConnection.getInstance().getConn();

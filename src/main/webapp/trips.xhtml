@@ -23,6 +23,10 @@
         <pe:timePicker value="#{tripsBean.startTimes[tripStatus.index]}" widgetVar="spinnerTimeWidget"/> <br/>
         <h:outputText value="#{label['endTime']}"/> <br/>
         <pe:timePicker value="#{tripsBean.endTimes[tripStatus.index]}" widgetVar="spinnerTimeWidget"/> <br/>
+        <h:outputText value="#{label['startLocation']}"/> <br/>
+        <h:inputText value="#{tripsBean.startLocations[tripStatus.index]}" converter="locationConverter"/> <br/>
+        <h:outputText value="#{label['endLocation']}"/> <br/>
+        <h:inputText value="#{tripsBean.endLocations[tripStatus.index]}" converter="locationConverter"/> <br/>
     </ui:repeat>
     <p:commandButton value="#{label['add']}" update="tripsForm" action="#{tripsBean.addListener()}"/><br/><br/>
     <p:commandButton value="#{label['remove']}" update="tripsForm" action="#{tripsBean.removeListener()}"/><br/><br/>
