@@ -104,6 +104,23 @@ public class TripDAOJdbc implements TripDAO {
         }
     }
 
+    @Override
+    public int getId(Trip trip) {
+        try (PreparedStatement pstmt = connection.prepareStatement("SELECT trip_id FROM trips WHERE duration = ? AND start_time = ?")) {
+            pstmt.setInt(1, trip.getDuration());
+            pstmt.setString(2, trip.getStartTime().format(formatter));
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+            if (rs != null && rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
     public TripDAOJdbc() {
         try {
             connection = DatabaseConnection.getInstance().getConn();

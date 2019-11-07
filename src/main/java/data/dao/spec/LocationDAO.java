@@ -18,4 +18,6 @@ public interface LocationDAO {
 
     void deleteAll();
 
+    int getId(Location location);
+
 }
