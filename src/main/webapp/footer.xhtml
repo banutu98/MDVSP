@@ -12,7 +12,7 @@
     <h1><h:outputText value="#{label['version']}"/></h1>
     <br/>
     <p:poll interval="3" update="sessionNumber"/>
-    <h:outputText id="sessionNumber" value="#{footerBean.extractSessionCount()}"/>
+    <h:outputText id="sessionNumber" value="#{label['activeSessions']} #{footerBean.extractSessionCount()}"/>
 </ui:composition>
 </body>
 </html>
