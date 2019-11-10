@@ -1,6 +1,7 @@
 package data.dao.jdbc;
 
 import data.dao.models.Depot;
+import data.dao.spec.BaseDAOJdbc;
 import data.dao.spec.DepotDAO;
 
 import java.sql.Connection;
@@ -10,9 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepotDAOJdbc implements DepotDAO {
-
-    private Connection connection;
+public class DepotDAOJdbc extends BaseDAOJdbc implements DepotDAO {
 
     @Override
     public void create(Depot depot) {
@@ -90,19 +89,14 @@ public class DepotDAOJdbc implements DepotDAO {
 
     @Override
     public void deleteAll() {
-        try(PreparedStatement pstmt = connection.prepareStatement("DELETE FROM depots")){
+        try (PreparedStatement pstmt = connection.prepareStatement("DELETE FROM depots")) {
             pstmt.execute();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public DepotDAOJdbc() {
-        try {
-            connection = DatabaseConnection.getInstance().getConn();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        super();
     }
 }
