@@ -1,6 +1,7 @@
 package data.dao.jdbc;
 
 import data.dao.models.Location;
+import data.dao.spec.BaseDAOJdbc;
 import data.dao.spec.LocationDAO;
 
 import java.sql.Connection;
@@ -10,9 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationDAOJdbc implements LocationDAO {
-
-    private Connection connection;
+public class LocationDAOJdbc extends BaseDAOJdbc implements LocationDAO {
 
     @Override
     public void create(Location location) {
@@ -117,10 +116,6 @@ public class LocationDAOJdbc implements LocationDAO {
     }
 
     public LocationDAOJdbc() {
-        try {
-            connection = DatabaseConnection.getInstance().getConn();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+       super();
     }
 }

@@ -2,19 +2,17 @@ package data.dao.jdbc;
 
 import data.dao.models.Association;
 import data.dao.spec.AssociationDAO;
+import data.dao.spec.BaseDAOJdbc;
 import data.dao.spec.LocationDAO;
 import data.dao.spec.TripDAO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssociationDAOJdbc implements AssociationDAO {
-
-    private Connection connection;
+public class AssociationDAOJdbc extends BaseDAOJdbc implements AssociationDAO {
 
     @Override
     public void create(Association association) {
@@ -108,10 +106,6 @@ public class AssociationDAOJdbc implements AssociationDAO {
     }
 
     public AssociationDAOJdbc() {
-        try {
-            connection = DatabaseConnection.getInstance().getConn();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        super();
     }
 }

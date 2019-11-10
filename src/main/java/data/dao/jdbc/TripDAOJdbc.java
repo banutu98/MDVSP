@@ -1,6 +1,7 @@
 package data.dao.jdbc;
 
 import data.dao.models.Trip;
+import data.dao.spec.BaseDAOJdbc;
 import data.dao.spec.TripDAO;
 
 import java.sql.*;
@@ -9,9 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TripDAOJdbc implements TripDAO {
+public class TripDAOJdbc extends BaseDAOJdbc implements TripDAO {
 
-    private Connection connection;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
     @Override
@@ -122,11 +122,7 @@ public class TripDAOJdbc implements TripDAO {
     }
 
     public TripDAOJdbc() {
-        try {
-            connection = DatabaseConnection.getInstance().getConn();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        super();
     }
 
 }
