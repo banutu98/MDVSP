@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en">
+<h:head>
+    <title><h:outputText value="#{label['signup']}"/></title>
+</h:head>
+<body>
+    <h:form>
+        <h:outputText value="#{label['name']}"/>
+        <p:inputText required="true" value="#{signup.name}" /> <br/> <br/>
+        <h:outputText value="#{label['password']}"/>
+        <p:password required="true" value="#{signup.firstPass}" feedback="true" promptLabel="#{label['passwordPrompt']}"
+                    weakLabel="#{label['passwordWeak']}" goodLabel="#{label['passwordGood']}"
+                    strongLabel="#{label['passwordStrong']}"/> <br/> <br/>
+        <h:outputText value="#{label['passwordAgain']}"/>
+        <p:password required="true" value="#{signup.secondPass}" feedback="true" promptLabel="#{label['passwordPrompt']}"
+                    weakLabel="#{label['passwordWeak']}" goodLabel="#{label['passwordGood']}"
+                    strongLabel="#{label['passwordStrong']}"/> <br/> <br/>
+        <p:commandButton value="#{label['submit']}" action="#{signup.submit()}"/>
+    </h:form>
+</body>
+</html>
