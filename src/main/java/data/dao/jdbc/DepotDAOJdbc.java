@@ -3,6 +3,7 @@ package data.dao.jdbc;
 import data.dao.models.Depot;
 import data.dao.spec.BaseDAOJdbc;
 import data.dao.spec.DepotDAO;
+import org.primefaces.context.PrimeApplicationContext;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
