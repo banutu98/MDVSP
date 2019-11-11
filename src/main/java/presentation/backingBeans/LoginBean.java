@@ -8,6 +8,7 @@ import data.dao.spec.UserDAO;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "loginBean")
 @ViewScoped
@@ -32,18 +33,25 @@ public class LoginBean {
         this.pass = pass;
     }
 
+
     public String login() {
         UserDAO userDAO = new UserDAOJdbc();
-        SchemaManagerDAO schemaManagerDAO = new SchemaMaangerDAOJdbc();
 
         User user = userDAO.findByName(name);
 
         if (pass.equals(user.getPassword())) {
-            SessionBean.userName = name;
+            getSessionBean().setUserName(name);
             return "upload";
         }
 
         return "errorLogin";
+    }
+
+    private SessionBean getSessionBean() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        return (SessionBean) facesContext.getApplication()
+                .createValueBinding("#{sessionBean}").getValue(facesContext);
     }
 
     public String goToSignup() {

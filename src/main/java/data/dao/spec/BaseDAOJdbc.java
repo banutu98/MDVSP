@@ -2,8 +2,7 @@ package data.dao.spec;
 
 import presentation.backingBeans.SessionBean;
 
-import javax.annotation.Resource;
-import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -21,7 +20,7 @@ public abstract class BaseDAOJdbc {
             Context context = new InitialContext();
             DataSource ds = (DataSource) context.lookup("java:/comp/env/jdbc/mdvsp");
             connection = ds.getConnection();
-            setSchema(SessionBean.userName);
+            setSchema(getSessionBean().getUserName());
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
@@ -37,5 +36,12 @@ public abstract class BaseDAOJdbc {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private SessionBean getSessionBean() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        return (SessionBean) facesContext.getApplication()
+                .createValueBinding("#{sessionBean}").getValue(facesContext);
     }
 }
