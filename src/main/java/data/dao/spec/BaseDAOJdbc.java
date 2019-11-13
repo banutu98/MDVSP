@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public abstract class BaseDAOJdbc {
+public abstract class BaseDAOJdbc extends BaseDAO {
 
     protected Connection connection;
 
@@ -36,12 +36,5 @@ public abstract class BaseDAOJdbc {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private SessionBean getSessionBean() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-
-        return (SessionBean) facesContext.getApplication()
-                .createValueBinding("#{sessionBean}").getValue(facesContext);
     }
 }

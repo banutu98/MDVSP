@@ -50,7 +50,7 @@
 
     <context-param>
         <param-name>connMethod</param-name>
-        <param-value>Alin</param-value>
+        <param-value>ConnectionPool</param-value>
     </context-param>
 
 </web-app>

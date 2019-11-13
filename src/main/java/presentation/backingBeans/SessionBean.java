@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class SessionBean {
 
-    private String userName;
+    private String userName = "default_schema";
 
     public String getUserName() {
         return userName;
