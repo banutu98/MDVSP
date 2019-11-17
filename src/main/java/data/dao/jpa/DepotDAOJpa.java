@@ -72,6 +72,7 @@ public class DepotDAOJpa extends BaseDAOJpa implements DepotDAO {
         DepotsEntity depot = em.find(DepotsEntity.class, id);
         em.remove(depot);
         em.getTransaction().commit();
+        em.close();
     }
 
     @Override

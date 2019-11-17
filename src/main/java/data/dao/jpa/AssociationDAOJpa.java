@@ -92,6 +92,7 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
         AssociationsEntity associationsEntity = em.find(AssociationsEntity.class, association.getTrip().getId());
         em.remove(associationsEntity);
         em.getTransaction().commit();
+        em.close();
     }
 
     @Override

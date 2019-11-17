@@ -72,6 +72,7 @@ public class TripDAOJpa extends BaseDAOJpa implements TripDAO {
         TripsEntity tripsEntity = em.find(TripsEntity.class, id);
         em.remove(tripsEntity);
         em.getTransaction().commit();
+        em.close();
     }
 
     @Override

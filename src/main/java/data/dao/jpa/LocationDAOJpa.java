@@ -72,6 +72,7 @@ public class LocationDAOJpa extends BaseDAOJpa implements LocationDAO {
         LocationsEntity location = em.find(LocationsEntity.class, id);
         em.remove(location);
         em.getTransaction().commit();
+        em.close();
     }
 
     @Override

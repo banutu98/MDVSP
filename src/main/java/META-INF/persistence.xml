@@ -8,6 +8,8 @@
         <class>data.entities.DepotsEntity</class>
         <class>data.entities.LocationsEntity</class>
         <class>data.entities.TripsEntity</class>
+        <class>data.entities.DriversEntity</class>
+        <class>data.entities.CustomersEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
