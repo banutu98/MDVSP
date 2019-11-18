@@ -30,13 +30,13 @@ CREATE TABLE IF NOT EXISTS associations(
 
 CREATE TABLE IF NOT EXISTS drivers(
   driver_id INT AUTO_INCREMENT PRIMARY KEY,
-  driver_name VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   car_model VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS customers(
   customer_id INT AUTO_INCREMENT PRIMARY KEY,
-  customer_name VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   trip_id INT NOT NULL,
   CONSTRAINT customer_trip_ref FOREIGN KEY (trip_id) REFERENCES trips(trip_id)
 );

@@ -1,5 +1,7 @@
 package business;
 
+import data.dao.jpa.DepotDAOJpa;
+import data.dao.jpa.TripDAOJpa;
 import data.dao.models.Car;
 import data.dao.models.Depot;
 import data.dao.models.Trip;
@@ -15,8 +17,8 @@ public class GreedySolver implements SolverStrategy {
     @Override
     public List<Pair<Trip, Depot>> solve() {
         List<Pair<Trip, Depot>> result = new ArrayList<>();
-        TripDAO tripDao = new TripDAOJdbc();
-        DepotDAO depotDao = new DepotDAOJdbc();
+        TripDAO tripDao = new TripDAOJpa();
+        DepotDAO depotDao = new DepotDAOJpa();
         Queue<Trip> tripsPriority = new PriorityQueue<Trip>(100, new Comparator<Trip>() {
             @Override
             public int compare(Trip trip, Trip t1) {

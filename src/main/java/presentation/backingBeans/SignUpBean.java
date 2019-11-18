@@ -2,6 +2,7 @@ package presentation.backingBeans;
 
 import data.dao.jdbc.SchemaMaangerDAOJdbc;
 import data.dao.jdbc.UserDAOJdbc;
+import data.dao.jpa.UserDAOJpa;
 import data.dao.models.User;
 import data.dao.spec.SchemaManagerDAO;
 import data.dao.spec.UserDAO;
@@ -43,7 +44,7 @@ public class SignUpBean {
 
     public String submit() {
         if (firstPass.equals(secondPass)) {
-            UserDAO userDAO = new UserDAOJdbc();
+            UserDAO userDAO = new UserDAOJpa();
             User user = userDAO.findByName(name);
             if (name.equals(user.getName())) {
                 return "userExists";

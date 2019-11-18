@@ -1,6 +1,7 @@
 package presentation.backingBeans;
 
 import data.dao.jdbc.DepotDAOJdbc;
+import data.dao.jpa.DepotDAOJpa;
 import data.dao.models.Depot;
 import data.dao.spec.DepotDAO;
 
@@ -40,7 +41,7 @@ public class DepotsBean {
     }
 
     public String submitListener() {
-        DepotDAO depotDAO = new DepotDAOJdbc();
+        DepotDAO depotDAO = new DepotDAOJpa();
         for (Depot depot : depots) {
             depotDAO.create(depot);
         }

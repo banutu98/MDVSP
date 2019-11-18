@@ -3,6 +3,8 @@ package data.generators;
 import com.github.javafaker.Faker;
 import data.dao.jdbc.DepotDAOJdbc;
 import data.dao.jdbc.TripDAOJdbc;
+import data.dao.jpa.DepotDAOJpa;
+import data.dao.jpa.TripDAOJpa;
 import data.dao.models.Depot;
 import data.dao.models.Trip;
 import data.dao.spec.DepotDAO;
@@ -20,9 +22,9 @@ public class DataGenerator {
 
     private static Faker faker = new Faker();
 
-    private static DepotDAO depotDAO = new DepotDAOJdbc();
+    private static DepotDAO depotDAO = new DepotDAOJpa();
 
-    private static TripDAO tripDAO = new TripDAOJdbc();
+    private static TripDAO tripDAO = new TripDAOJpa();
 
     private static final String DATA_DIR_PATH = "C:\\Users\\tatu georgian\\Desktop\\MDVSP\\src\\main\\resources\\generateddata\\";
 
