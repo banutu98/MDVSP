@@ -2,6 +2,7 @@ package presentation.backingBeans;
 
 import data.dao.jdbc.SchemaMaangerDAOJdbc;
 import data.dao.jdbc.UserDAOJdbc;
+import data.dao.jpa.UserDAOJpa;
 import data.dao.models.User;
 import data.dao.spec.SchemaManagerDAO;
 import data.dao.spec.UserDAO;
@@ -35,7 +36,7 @@ public class LoginBean {
 
 
     public String login() {
-        UserDAO userDAO = new UserDAOJdbc();
+        UserDAO userDAO = new UserDAOJpa();
 
         User user = userDAO.findByName(name);
 

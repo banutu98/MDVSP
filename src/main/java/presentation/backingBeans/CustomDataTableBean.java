@@ -4,6 +4,10 @@ import data.dao.jdbc.AssociationDAOJdbc;
 import data.dao.jdbc.DepotDAOJdbc;
 import data.dao.jdbc.LocationDAOJdbc;
 import data.dao.jdbc.TripDAOJdbc;
+import data.dao.jpa.AssociationDAOJpa;
+import data.dao.jpa.DepotDAOJpa;
+import data.dao.jpa.LocationDAOJpa;
+import data.dao.jpa.TripDAOJpa;
 import data.dao.models.Association;
 import data.dao.models.Depot;
 import data.dao.models.Location;
@@ -56,7 +60,7 @@ public class CustomDataTableBean {
         if (rows == null) {
             rows = new ArrayList<>();
             if (table.equalsIgnoreCase("depots")) {
-                DepotDAO depotDAO = new DepotDAOJdbc();
+                DepotDAO depotDAO = new DepotDAOJpa();
                 for (Depot depot : depotDAO.readAll()) {
                     String[] row = new String[3];
                     row[0] = Integer.toString(depot.getId());
@@ -66,7 +70,7 @@ public class CustomDataTableBean {
                 }
             }
             if (table.equalsIgnoreCase("locations")) {
-                LocationDAO locationDAO = new LocationDAOJdbc();
+                LocationDAO locationDAO = new LocationDAOJpa();
                 for (Location location : locationDAO.readAll()) {
                     String[] row = new String[3];
                     row[0] = Integer.toString(location.getId());
@@ -77,7 +81,7 @@ public class CustomDataTableBean {
             }
 
             if (table.equalsIgnoreCase("trips")) {
-                TripDAO tripDAO = new TripDAOJdbc();
+                TripDAO tripDAO = new TripDAOJpa();
                 for (Trip trip : tripDAO.readAll()) {
                     String[] row = new String[3];
                     row[0] = Integer.toString(trip.getId());
@@ -88,7 +92,7 @@ public class CustomDataTableBean {
             }
 
             if (table.equalsIgnoreCase("associations")) {
-                AssociationDAO associationDAO = new AssociationDAOJdbc();
+                AssociationDAO associationDAO = new AssociationDAOJpa();
                 for (Association association : associationDAO.readAll()) {
                     String[] row = new String[3];
                     row[0] = Integer.toString(association.getTrip().getId());
@@ -117,7 +121,7 @@ public class CustomDataTableBean {
     public String submit(String table) {
         try {
             if (table.equalsIgnoreCase("depots")) {
-                DepotDAO depotDAO = new DepotDAOJdbc();
+                DepotDAO depotDAO = new DepotDAOJpa();
                 depotDAO.deleteAll();
                 for (String[] row : rows) {
                     depotDAO.create(createDepot(row));
@@ -125,7 +129,7 @@ public class CustomDataTableBean {
             }
 
             if (table.equalsIgnoreCase("locations")) {
-                LocationDAO locationDAO = new LocationDAOJdbc();
+                LocationDAO locationDAO = new LocationDAOJpa();
                 locationDAO.deleteAll();
                 for (String[] row : rows) {
                     locationDAO.create(createLocation(row));
@@ -133,7 +137,7 @@ public class CustomDataTableBean {
             }
 
             if (table.equalsIgnoreCase("trips")) {
-                TripDAO tripDAO = new TripDAOJdbc();
+                TripDAO tripDAO = new TripDAOJpa();
                 tripDAO.deleteAll();
                 for (String[] row : rows) {
                     tripDAO.create(createTrip(row));
@@ -141,7 +145,7 @@ public class CustomDataTableBean {
             }
 
             if (table.equalsIgnoreCase("associations")) {
-                AssociationDAO associationDAO = new AssociationDAOJdbc();
+                AssociationDAO associationDAO = new AssociationDAOJpa();
                 associationDAO.deleteAll();
                 for (String[] row : rows) {
                     associationDAO.create(createAssociation(row));

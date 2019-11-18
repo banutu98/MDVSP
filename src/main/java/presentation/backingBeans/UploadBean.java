@@ -2,6 +2,8 @@ package presentation.backingBeans;
 
 import data.dao.jdbc.DepotDAOJdbc;
 import data.dao.jdbc.TripDAOJdbc;
+import data.dao.jpa.DepotDAOJpa;
+import data.dao.jpa.TripDAOJpa;
 import data.dao.models.Depot;
 import data.dao.models.Trip;
 import data.dao.spec.DepotDAO;
@@ -62,8 +64,8 @@ public class UploadBean {
                 tripList.add(new Trip(LocalTime.of(hour, minutes), duration));
             }
 
-            DepotDAO depotDAO = new DepotDAOJdbc();
-            TripDAO tripDAO = new TripDAOJdbc();
+            DepotDAO depotDAO = new DepotDAOJpa();
+            TripDAO tripDAO = new TripDAOJpa();
 
             for (Depot depot : depotList) {
                 depotDAO.create(depot);

@@ -6,10 +6,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "customers")
-public class CustomersEntity {
+public class CustomersEntity extends Person{
 
     private int customerId;
-    private String customerName;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_id", referencedColumnName = "trip_id")
@@ -29,16 +28,6 @@ public class CustomersEntity {
         this.customerId = customerId;
     }
 
-    @Basic
-    @Column(name = "customer_name")
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
     public Set<DriversEntity> getRequestedDrivers() {
         return requestedDrivers;
     }
@@ -53,21 +42,5 @@ public class CustomersEntity {
 
     public void setTrip(TripsEntity trip) {
         this.trip = trip;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CustomersEntity that = (CustomersEntity) o;
-        return customerId == that.customerId &&
-                Objects.equals(customerName, that.customerName) &&
-                Objects.equals(trip, that.trip) &&
-                Objects.equals(requestedDrivers, that.requestedDrivers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerId, customerName, trip, requestedDrivers);
     }
 }

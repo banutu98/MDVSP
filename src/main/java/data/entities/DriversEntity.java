@@ -6,10 +6,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "drivers")
-public class DriversEntity {
+public class DriversEntity extends Person{
 
     private int driverId;
-    private String driverName;
     private String carModel;
 
     @ManyToMany
@@ -19,25 +18,15 @@ public class DriversEntity {
             inverseJoinColumns = @JoinColumn(name = "customer_id"))
     private Set<CustomersEntity> assignedCustomers;
 
-    public void setDriver_id(int driverId) {
+    public void setDriverId(int driverId) {
         this.driverId = driverId;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "driver_id")
-    public int getDriver_id() {
+    public int getDriverId() {
         return driverId;
-    }
-
-    @Basic
-    @Column(name = "driver_name")
-    public String getDriverName() {
-        return driverName;
-    }
-
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
     }
 
     @Basic
@@ -48,22 +37,6 @@ public class DriversEntity {
 
     public void setCarModel(String carModel) {
         this.carModel = carModel;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DriversEntity that = (DriversEntity) o;
-        return driverId == that.driverId &&
-                Objects.equals(driverName, that.driverName) &&
-                Objects.equals(carModel, that.carModel) &&
-                Objects.equals(assignedCustomers, that.assignedCustomers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(driverId, driverName, carModel, assignedCustomers);
     }
 
     public Set<CustomersEntity> getAssignedCustomers() {

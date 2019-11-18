@@ -4,6 +4,9 @@ package presentation.backingBeans;
 import data.dao.jdbc.AssociationDAOJdbc;
 import data.dao.jdbc.LocationDAOJdbc;
 import data.dao.jdbc.TripDAOJdbc;
+import data.dao.jpa.AssociationDAOJpa;
+import data.dao.jpa.LocationDAOJpa;
+import data.dao.jpa.TripDAOJpa;
 import data.dao.models.Association;
 import data.dao.models.Location;
 import data.dao.models.Trip;
@@ -97,7 +100,7 @@ public class TripsBean {
     }
 
     public String submitListener() {
-        TripDAO tripDAO = new TripDAOJdbc();
+        TripDAO tripDAO = new TripDAOJpa();
         Calendar calendar = GregorianCalendar.getInstance();
         for (int i = 0; i < trips.size(); i++) {
             calendar.setTime(startTimes.get(i));
@@ -110,7 +113,7 @@ public class TripsBean {
             trips.get(i).setDuration((int) duration);
             tripDAO.create(trips.get(i));
         }
-        LocationDAO locationDAO = new LocationDAOJdbc();
+        LocationDAO locationDAO = new LocationDAOJpa();
 
         for (Location startLocation : startLocations) {
             locationDAO.create(startLocation);
@@ -120,7 +123,7 @@ public class TripsBean {
             locationDAO.create(endLocation);
         }
 
-        AssociationDAO associationDAO = new AssociationDAOJdbc();
+        AssociationDAO associationDAO = new AssociationDAOJpa();
         for (int i = 0; i < trips.size(); i++) {
             Association association = new Association();
             trips.get(i).setId(tripDAO.getId(trips.get(i)));
