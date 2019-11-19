@@ -33,6 +33,7 @@ public class LocationDAOJpa extends BaseDAOJpa implements LocationDAO {
         ModelMapper mapper = new ModelMapper();
         Location location = new Location();
         mapper.map(location, locationsEntity);
+        em.getTransaction().commit();
         em.close();
         return location;
     }
@@ -50,6 +51,7 @@ public class LocationDAOJpa extends BaseDAOJpa implements LocationDAO {
             mapper.map(e, location);
             locations.add(location);
         }
+        em.getTransaction().commit();
         em.close();
         return locations;
     }
@@ -58,9 +60,10 @@ public class LocationDAOJpa extends BaseDAOJpa implements LocationDAO {
     public void update(Location location) {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
-        LocationsEntity old = em.find(LocationsEntity.class, location.getId());
+        LocationsEntity old = em.find(LocationsEntity.class, location.getLocationId());
         old.setX(location.getX());
         old.setY(location.getY());
+        em.persist(old);
         em.getTransaction().commit();
         em.close();
     }
@@ -89,9 +92,11 @@ public class LocationDAOJpa extends BaseDAOJpa implements LocationDAO {
     public int getId(Location location) {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
-        LocationsEntity locationsEntity = em.find(LocationsEntity.class, location.getId());
-        if(locationsEntity != null)
+        LocationsEntity locationsEntity = em.find(LocationsEntity.class, location.getLocationId());
+        em.getTransaction().commit();
+        if (locationsEntity != null) {
             return locationsEntity.getLocationId();
+        }
         return 0;
     }
 }

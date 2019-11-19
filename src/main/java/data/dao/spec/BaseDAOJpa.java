@@ -10,14 +10,7 @@ public abstract class BaseDAOJpa extends BaseDAO {
 
     public BaseDAOJpa() {
         EntityManagerFactory managerFactory = null;
-        Map<String, String> persistenceMap = new HashMap<String, String>();
-
-        persistenceMap.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost:3306/" + getSessionBean().getUserName());
-        persistenceMap.put("javax.persistence.jdbc.user", "banutu98");
-        persistenceMap.put("javax.persistence.jdbc.password", "<pass>");
-        persistenceMap.put("javax.persistence.jdbc.driver", "com.mysql.cj.jdbc.Driver");
-
-        emf = Persistence.createEntityManagerFactory("MDVSPUnit", persistenceMap);
+        emf = Persistence.createEntityManagerFactory("MDVSPUnit");
     }
 
     public EntityManager getEntityManager() {

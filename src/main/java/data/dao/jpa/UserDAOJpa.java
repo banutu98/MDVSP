@@ -29,6 +29,7 @@ public class UserDAOJpa extends BaseDAOJpa implements UserDAO {
         ModelMapper mapper = new ModelMapper();
         User user = new User();
         mapper.map(user, usersEntity);
+        em.getTransaction().commit();
         em.close();
         return user;
     }

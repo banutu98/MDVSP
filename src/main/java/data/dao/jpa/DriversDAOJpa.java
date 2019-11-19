@@ -28,6 +28,7 @@ public class DriversDAOJpa extends BaseDAOJpa implements DriversDAO {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         DriversEntity entity = em.find(DriversEntity.class, id);
+        em.getTransaction().commit();
         em.close();
         return DriverMapper.fromEntityToModel(entity);
     }

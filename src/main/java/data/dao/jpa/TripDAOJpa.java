@@ -33,6 +33,7 @@ public class TripDAOJpa extends BaseDAOJpa implements TripDAO {
         ModelMapper mapper = new ModelMapper();
         Trip trip = new Trip();
         mapper.map(trip, tripsEntity);
+        em.getTransaction().commit();
         em.close();
         return trip;
     }
@@ -50,6 +51,7 @@ public class TripDAOJpa extends BaseDAOJpa implements TripDAO {
             mapper.map(e, trip);
             trips.add(trip);
         }
+        em.getTransaction().commit();
         em.close();
         return trips;
     }
@@ -90,6 +92,7 @@ public class TripDAOJpa extends BaseDAOJpa implements TripDAO {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         TripsEntity tripsEntity = em.find(TripsEntity.class, trip.getId());
+        em.getTransaction().commit();
         if(tripsEntity != null)
             return tripsEntity.getTripId();
         return 0;

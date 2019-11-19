@@ -10,6 +10,7 @@ import data.entities.AssociationsEntity;
 import data.entities.DepotsEntity;
 import data.entities.LocationsEntity;
 import data.entities.TripsEntity;
+import data.mappers.TripMapper;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.EntityManager;
@@ -39,6 +40,7 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
         ModelMapper mapper = new ModelMapper();
         Association association = new Association();
         mapper.map(association, associationsEntity);
+        em.getTransaction().commit();
         em.close();
         return association;
     }
@@ -56,6 +58,7 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
             mapper.map(e, association);
             associations.add(association);
         }
+        em.getTransaction().commit();
         em.close();
         return associations;
     }
@@ -65,12 +68,11 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         AssociationsEntity old = em.find(AssociationsEntity.class, association.getTrip().getId());
-        ModelMapper mapper = new ModelMapper();
         Trip trip = association.getTrip();
-        TripsEntity tripsEntity = new TripsEntity();
-        mapper.map(trip, tripsEntity);
+        TripsEntity tripsEntity = TripMapper.fromModelToEntity(trip);
         old.setTrip(tripsEntity);
 
+        ModelMapper mapper = new ModelMapper();
         Location startLocation = association.getStartLocation();
         LocationsEntity startLocationEntity = new LocationsEntity();
         mapper.map(startLocation, startLocationEntity);
@@ -81,6 +83,7 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
         mapper.map(endLocation, endLocationEntity);
         old.setEndLocation(endLocationEntity);
 
+        em.persist(old);
         em.getTransaction().commit();
         em.close();
     }

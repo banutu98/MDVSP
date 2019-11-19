@@ -33,6 +33,7 @@ public class DepotDAOJpa extends BaseDAOJpa implements DepotDAO {
         ModelMapper mapper = new ModelMapper();
         Depot depot = new Depot();
         mapper.map(depot, depotEntity);
+        em.getTransaction().commit();
         em.close();
         return depot;
     }
@@ -50,6 +51,7 @@ public class DepotDAOJpa extends BaseDAOJpa implements DepotDAO {
             mapper.map(e, depot);
             depots.add(depot);
         }
+        em.getTransaction().commit();
         em.close();
         return depots;
     }
@@ -61,6 +63,7 @@ public class DepotDAOJpa extends BaseDAOJpa implements DepotDAO {
         DepotsEntity old = em.find(DepotsEntity.class, depot.getId());
         old.setCapacity(depot.getCapacity());
         old.setName(depot.getName());
+        em.persist(old);
         em.getTransaction().commit();
         em.close();
     }

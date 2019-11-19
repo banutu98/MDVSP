@@ -4,7 +4,6 @@ import data.dao.models.Location;
 import data.dao.spec.BaseDAOJdbc;
 import data.dao.spec.LocationDAO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class LocationDAOJdbc extends BaseDAOJdbc implements LocationDAO {
             pstmt.execute();
             ResultSet rs = pstmt.getResultSet();
             if (rs != null && rs.next()) {
-                result.setId(id);
+                result.setLocationId(id);
                 result.setX(rs.getDouble(2));
                 result.setY(rs.getDouble(3));
             }
@@ -54,7 +53,7 @@ public class LocationDAOJdbc extends BaseDAOJdbc implements LocationDAO {
             if (rs != null) {
                 while (rs.next()) {
                     Location location = new Location();
-                    location.setId(rs.getInt(1));
+                    location.setLocationId(rs.getInt(1));
                     location.setX(rs.getDouble(2));
                     location.setY(rs.getDouble(3));
                     result.add(location);
@@ -72,7 +71,7 @@ public class LocationDAOJdbc extends BaseDAOJdbc implements LocationDAO {
         try (PreparedStatement pstmt = connection.prepareStatement("UPDATE locations SET x = ? , y = ? WHERE location_id = ?")) {
             pstmt.setDouble(1, location.getX());
             pstmt.setDouble(2, location.getY());
-            pstmt.setInt(3, location.getId());
+            pstmt.setInt(3, location.getLocationId());
             pstmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();

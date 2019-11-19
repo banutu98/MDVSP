@@ -3,6 +3,7 @@
 
     <persistence-unit name="MDVSPUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:comp/env/jdbc/mdvsp</jta-data-source>
         <class>data.entities.UsersEntity</class>
         <class>data.entities.AssociationsEntity</class>
         <class>data.entities.DepotsEntity</class>
@@ -11,10 +12,6 @@
         <class>data.entities.DriversEntity</class>
         <class>data.entities.CustomersEntity</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="hibernate.connection.username" value=""/>
-            <property name="hibernate.connection.password" value=""/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
