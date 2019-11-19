@@ -1,9 +1,6 @@
 package presentation.backingBeans;
 
 
-import data.dao.jdbc.AssociationDAOJdbc;
-import data.dao.jdbc.LocationDAOJdbc;
-import data.dao.jdbc.TripDAOJdbc;
 import data.dao.jpa.AssociationDAOJpa;
 import data.dao.jpa.LocationDAOJpa;
 import data.dao.jpa.TripDAOJpa;
@@ -127,8 +124,8 @@ public class TripsBean {
         for (int i = 0; i < trips.size(); i++) {
             Association association = new Association();
             trips.get(i).setId(tripDAO.getId(trips.get(i)));
-            startLocations.get(i).setId(locationDAO.getId(startLocations.get(i)));
-            endLocations.get(i).setId(locationDAO.getId(endLocations.get(i)));
+            startLocations.get(i).setLocationId(locationDAO.getId(startLocations.get(i)));
+            endLocations.get(i).setLocationId(locationDAO.getId(endLocations.get(i)));
             association.setTrip(trips.get(i));
             association.setStartLocation(startLocations.get(i));
             association.setEndLocation(endLocations.get(i));

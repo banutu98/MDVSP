@@ -2,18 +2,18 @@ package data.dao.models;
 
 public class Location {
 
-    private int id;
+    private int locationId;
 
     private double x;
 
     private double y;
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public double getX() {

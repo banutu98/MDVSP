@@ -1,9 +1,5 @@
 package presentation.backingBeans;
 
-import data.dao.jdbc.AssociationDAOJdbc;
-import data.dao.jdbc.DepotDAOJdbc;
-import data.dao.jdbc.LocationDAOJdbc;
-import data.dao.jdbc.TripDAOJdbc;
 import data.dao.jpa.AssociationDAOJpa;
 import data.dao.jpa.DepotDAOJpa;
 import data.dao.jpa.LocationDAOJpa;
@@ -24,8 +20,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -73,7 +67,7 @@ public class CustomDataTableBean {
                 LocationDAO locationDAO = new LocationDAOJpa();
                 for (Location location : locationDAO.readAll()) {
                     String[] row = new String[3];
-                    row[0] = Integer.toString(location.getId());
+                    row[0] = Integer.toString(location.getLocationId());
                     row[1] = Double.toString(location.getX());
                     row[2] = Double.toString(location.getY());
                     rows.add(row);
@@ -96,8 +90,8 @@ public class CustomDataTableBean {
                 for (Association association : associationDAO.readAll()) {
                     String[] row = new String[3];
                     row[0] = Integer.toString(association.getTrip().getId());
-                    row[1] = Integer.toString(association.getStartLocation().getId());
-                    row[2] = Integer.toString(association.getEndLocation().getId());
+                    row[1] = Integer.toString(association.getStartLocation().getLocationId());
+                    row[2] = Integer.toString(association.getEndLocation().getLocationId());
                     rows.add(row);
                 }
             }
@@ -169,7 +163,7 @@ public class CustomDataTableBean {
 
     private Location createLocation(String[] row) {
         Location location = new Location();
-        location.setId(Integer.valueOf(row[0]));
+        location.setLocationId(Integer.valueOf(row[0]));
         location.setX(Double.valueOf(row[1]));
         location.setY(Double.valueOf(row[2]));
         return location;
@@ -192,8 +186,8 @@ public class CustomDataTableBean {
         association.setStartLocation(new Location());
         association.setEndLocation(new Location());
         association.getTrip().setId(Integer.valueOf(row[0]));
-        association.getStartLocation().setId(Integer.valueOf(row[1]));
-        association.getEndLocation().setId(Integer.valueOf(row[2]));
+        association.getStartLocation().setLocationId(Integer.valueOf(row[1]));
+        association.getEndLocation().setLocationId(Integer.valueOf(row[2]));
         return association;
     }
 

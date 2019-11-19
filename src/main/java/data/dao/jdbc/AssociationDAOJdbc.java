@@ -19,8 +19,8 @@ public class AssociationDAOJdbc extends BaseDAOJdbc implements AssociationDAO {
         try (PreparedStatement pstmt = connection.prepareStatement(
                 "INSERT INTO associations(trip_id, start_location_id, end_location_id) VALUES (?, ?, ?)")) {
             pstmt.setInt(1, association.getTrip().getId());
-            pstmt.setInt(2, association.getStartLocation().getId());
-            pstmt.setInt(3, association.getEndLocation().getId());
+            pstmt.setInt(2, association.getStartLocation().getLocationId());
+            pstmt.setInt(3, association.getEndLocation().getLocationId());
             pstmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,8 +78,8 @@ public class AssociationDAOJdbc extends BaseDAOJdbc implements AssociationDAO {
     public void update(Association association) {
         try (PreparedStatement pstmt = connection.prepareStatement(
                 "UPDATE associations SET start_location_id = ? , end_location_id = ? WHERE trip_id = ?")) {
-            pstmt.setInt(1, association.getStartLocation().getId());
-            pstmt.setInt(2, association.getEndLocation().getId());
+            pstmt.setInt(1, association.getStartLocation().getLocationId());
+            pstmt.setInt(2, association.getEndLocation().getLocationId());
             pstmt.setInt(3, association.getTrip().getId());
         } catch (SQLException e) {
             e.printStackTrace();

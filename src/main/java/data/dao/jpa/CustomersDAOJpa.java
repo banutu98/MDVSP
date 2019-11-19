@@ -26,8 +26,10 @@ public class CustomersDAOJpa extends BaseDAOJpa implements CustomersDAO {
     @Override
     public Customer read(int id) {
         EntityManager em = getEntityManager();
+        em.getTransaction().begin();
         CustomersEntity customersEntity = em.find(CustomersEntity.class, id);
         Customer customer = CustomerMapper.fromEntityToModel(customersEntity);
+        em.getTransaction().commit();
         em.close();
         return customer;
     }
