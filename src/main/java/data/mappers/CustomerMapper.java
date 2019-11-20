@@ -14,7 +14,6 @@ public final class CustomerMapper {
         customer.setCustomerId(entity.getCustomerId());
         customer.setName(entity.getName());
         customer.setTrip(TripMapper.fromEntityToModel(entity.getTrip()));
-        customer.setRequestedDrivers(DriverMapper.fromEntitySetToModelSet(entity.getRequestedDrivers()));
         return customer;
     }
 
@@ -26,7 +25,6 @@ public final class CustomerMapper {
         CustomersEntity entity = new CustomersEntity();
         entity.setCustomerId(customer.getCustomerId());
         entity.setName(customer.getName());
-        entity.setRequestedDrivers(DriverMapper.fromModelSetToEntitySet(customer.getRequestedDrivers()));
         entity.setTrip(TripMapper.fromModelToEntity(customer.getTrip()));
         return entity;
     }

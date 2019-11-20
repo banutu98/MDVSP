@@ -6,12 +6,18 @@ import java.util.Set;
 
 @Entity
 @Table(name = "drivers")
-public class DriversEntity extends Person{
+public class DriversEntity extends Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "driver_id")
     private int driverId;
+
+    @Basic
+    @Column(name = "car_model")
     private String carModel;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "drivers_requests",
             joinColumns = @JoinColumn(name = "driver_id"),
@@ -22,15 +28,10 @@ public class DriversEntity extends Person{
         this.driverId = driverId;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "driver_id")
     public int getDriverId() {
         return driverId;
     }
 
-    @Basic
-    @Column(name = "car_model")
     public String getCarModel() {
         return carModel;
     }

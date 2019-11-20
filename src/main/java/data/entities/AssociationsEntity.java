@@ -1,10 +1,14 @@
 package data.entities;
 
+import data.entityKeys.AssociationsEntityKey;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "associations")
-public class AssociationsEntity {
+@IdClass(value = AssociationsEntityKey.class)
+public class AssociationsEntity{
 
     @Id
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

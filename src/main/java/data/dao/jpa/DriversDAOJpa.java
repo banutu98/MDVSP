@@ -3,6 +3,7 @@ package data.dao.jpa;
 import data.dao.models.Driver;
 import data.dao.spec.BaseDAOJpa;
 import data.dao.spec.DriversDAO;
+import data.entities.CustomersEntity;
 import data.entities.DriversEntity;
 import data.mappers.DriverMapper;
 

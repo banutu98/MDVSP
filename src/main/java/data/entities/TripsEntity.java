@@ -7,13 +7,21 @@ import java.util.Set;
 @Entity
 @Table(name = "trips")
 public class TripsEntity {
-    private int tripId;
-    private String startTime;
-    private int duration;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "trip_id")
+    private int tripId;
+
+    @Basic
+    @Column(name = "start_time")
+    private String startTime;
+
+    @Basic
+    @Column(name = "duration")
+    private int duration;
+
+
     public int getTripId() {
         return tripId;
     }
@@ -22,8 +30,6 @@ public class TripsEntity {
         this.tripId = tripId;
     }
 
-    @Basic
-    @Column(name = "start_time")
     public String getStartTime() {
         return startTime;
     }
@@ -32,8 +38,6 @@ public class TripsEntity {
         this.startTime = startTime;
     }
 
-    @Basic
-    @Column(name = "duration")
     public int getDuration() {
         return duration;
     }

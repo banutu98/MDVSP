@@ -1,10 +1,7 @@
 package presentation.backingBeans;
 
-import data.dao.jdbc.SchemaMaangerDAOJdbc;
-import data.dao.jdbc.UserDAOJdbc;
 import data.dao.jpa.UserDAOJpa;
 import data.dao.models.User;
-import data.dao.spec.SchemaManagerDAO;
 import data.dao.spec.UserDAO;
 
 import javax.faces.bean.ManagedBean;
@@ -36,7 +33,7 @@ public class LoginBean {
 
 
     public String login() {
-        UserDAO userDAO = new UserDAOJpa();
+      /*  UserDAO userDAO = new UserDAOJpa();
 
         User user = userDAO.findByName(name);
 
@@ -45,7 +42,9 @@ public class LoginBean {
             return "upload";
         }
 
-        return "errorLogin";
+        return "errorLogin";*/
+
+      return "upload";
     }
 
     private SessionBean getSessionBean() {

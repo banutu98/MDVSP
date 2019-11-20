@@ -6,13 +6,21 @@ import java.util.Objects;
 @Entity
 @Table(name = "depots")
 public class DepotsEntity {
-    private int id;
-    private String name;
-    private int capacity;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "depot_id")
+    private int id;
+
+    @Basic
+    @Column(name = "name")
+    private String name;
+
+    @Basic
+    @Column(name = "capacity")
+    private int capacity;
+
+
     public int getDepotId() {
         return id;
     }
@@ -21,8 +29,6 @@ public class DepotsEntity {
         this.id = depotId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -31,8 +37,6 @@ public class DepotsEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "capacity")
     public int getCapacity() {
         return capacity;
     }

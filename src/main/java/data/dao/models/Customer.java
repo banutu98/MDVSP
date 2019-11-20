@@ -7,7 +7,6 @@ public class Customer {
     private int customerId;
     private String name;
     private Trip trip;
-    private Set<Driver> requestedDrivers;
 
     public int getCustomerId() {
         return customerId;
@@ -31,13 +30,5 @@ public class Customer {
 
     public void setTrip(Trip trip) {
         this.trip = trip;
-    }
-
-    public Set<Driver> getRequestedDrivers() {
-        return requestedDrivers;
-    }
-
-    public void setRequestedDrivers(Set<Driver> requestedDrivers) {
-        this.requestedDrivers = requestedDrivers;
     }
 }

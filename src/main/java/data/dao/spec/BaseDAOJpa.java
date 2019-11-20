@@ -22,4 +22,18 @@ public abstract class BaseDAOJpa extends BaseDAO {
         super.finalize();
         emf.close();
     }
+
+    protected <T> T find(EntityManager em, Class<T> objClass, Object id) {
+        try {
+            T result = em.find(objClass, id);
+            if (result == null) {
+                return objClass.newInstance();
+            }
+
+            return result;
+        } catch (IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
