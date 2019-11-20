@@ -6,11 +6,14 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class UsersEntity {
-    private String name;
-    private String pass;
-
     @Id
     @Column(name = "name")
+    private String name;
+
+    @Basic
+    @Column(name = "pass")
+    private String pass;
+
     public String getName() {
         return name;
     }
@@ -19,8 +22,6 @@ public class UsersEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "pass")
     public String getPass() {
         return pass;
     }

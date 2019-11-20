@@ -7,10 +7,10 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Person {
 
-    protected String name;
-
     @Basic
     @Column(name = "name")
+    protected String name;
+
     public String getName() {
         return name;
     }

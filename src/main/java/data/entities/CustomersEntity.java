@@ -8,18 +8,18 @@ import java.util.Set;
 @Table(name = "customers")
 public class CustomersEntity extends Person{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "customer_id")
     private int customerId;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_id", referencedColumnName = "trip_id")
     private TripsEntity trip;
 
-    @ManyToMany(mappedBy = "assignedCustomers")
+    @ManyToMany(mappedBy = "assignedCustomers", cascade = {CascadeType.ALL})
     private Set<DriversEntity> requestedDrivers;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "customer_id")
     public int getCustomerId() {
         return customerId;
     }
