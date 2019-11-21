@@ -17,7 +17,7 @@ public class SchemaMaangerDAOJdbc extends BaseDAOJdbc implements SchemaManagerDA
     public void createSchema(String name) {
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("CREATE SCHEMA " + name);
-            setSchema(name);
+            setSchema(connection, name);
             runScript();
         } catch (SQLException | FileNotFoundException e) {
             e.printStackTrace();

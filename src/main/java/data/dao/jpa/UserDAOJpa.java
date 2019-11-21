@@ -13,9 +13,9 @@ public class UserDAOJpa extends BaseDAOJpa implements UserDAO {
     public void create(User user) {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
-        ModelMapper mapper = new ModelMapper();
         UsersEntity usersEntity = new UsersEntity();
-        mapper.map(user, usersEntity);
+        usersEntity.setName(user.getName());
+        usersEntity.setPass(user.getPass());
         em.persist(usersEntity);
         em.getTransaction().commit();
         em.close();
@@ -26,9 +26,12 @@ public class UserDAOJpa extends BaseDAOJpa implements UserDAO {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         UsersEntity usersEntity = em.find(UsersEntity.class, name);
+        if(usersEntity == null){
+            return new User();
+        }
         ModelMapper mapper = new ModelMapper();
         User user = new User();
-        mapper.map(user, usersEntity);
+        mapper.map(usersEntity, user);
         em.getTransaction().commit();
         em.close();
         return user;

@@ -33,18 +33,17 @@ public class LoginBean {
 
 
     public String login() {
-      /*  UserDAO userDAO = new UserDAOJpa();
+        UserDAO userDAO = new UserDAOJpa();
 
         User user = userDAO.findByName(name);
 
-        if (pass.equals(user.getPassword())) {
+        if (pass.equals(user.getPass())) {
             getSessionBean().setUserName(name);
             return "upload";
         }
 
-        return "errorLogin";*/
+        return "errorLogin";
 
-      return "upload";
     }
 
     private SessionBean getSessionBean() {
@@ -56,5 +55,9 @@ public class LoginBean {
 
     public String goToSignup() {
         return "signup";
+    }
+
+    public LoginBean(){
+        getSessionBean().setUserName("default_schema");
     }
 }
