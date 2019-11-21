@@ -14,7 +14,7 @@ public class UserDAOJdbc extends BaseDAOJdbc implements UserDAO {
     public void create(User user) {
         try (PreparedStatement pstmt = connection.prepareStatement("INSERT INTO default_schema.users(name, pass) VALUES (?, ?)")) {
             pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getPassword());
+            pstmt.setString(2, user.getPass());
             pstmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class UserDAOJdbc extends BaseDAOJdbc implements UserDAO {
             ResultSet rs = pstmt.getResultSet();
             if (rs != null && rs.next()) {
                 user.setName(name);
-                user.setPassword(rs.getString(2));
+                user.setPass(rs.getString(2));
             }
         } catch (SQLException e) {
             e.printStackTrace();

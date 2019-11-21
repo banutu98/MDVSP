@@ -3,7 +3,7 @@ package data.dao.models;
 public class User {
 
     private String name;
-    private String password;
+    private String pass;
 
     public String getName() {
         return name;
@@ -13,17 +13,17 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPass() {
+        return pass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
-    public User(String name, String password) {
+    public User(String name, String pass) {
         this.name = name;
-        this.password = password;
+        this.pass = pass;
     }
 
     public User(){

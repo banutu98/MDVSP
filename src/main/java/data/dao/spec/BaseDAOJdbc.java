@@ -13,27 +13,13 @@ import java.sql.Statement;
 
 public abstract class BaseDAOJdbc extends BaseDAO {
 
-    protected Connection connection;
-
     public BaseDAOJdbc() {
         try {
             Context context = new InitialContext();
             DataSource ds = (DataSource) context.lookup("java:/comp/env/jdbc/mdvsp");
             connection = ds.getConnection();
-            setSchema(getSessionBean().getUserName());
+            setSchema(connection, getSessionBean().getUserName());
         } catch (SQLException | NamingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected void setSchema(String name){
-        if(name == null || name.isEmpty()){
-            name = "default_schema";
-        }
-
-        try (Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate("USE " + name);
-        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
