@@ -2,6 +2,8 @@ package data.dao.spec;
 
 import data.dao.models.Customer;
 
+import java.util.List;
+
 public interface CustomersDAO {
 
     void create(Customer customer);
@@ -11,4 +13,6 @@ public interface CustomersDAO {
     void update(Customer customer);
 
     void delete(Customer customer);
+
+    List<Customer> readAll();
 }

@@ -2,6 +2,8 @@ package data.dao.spec;
 
 import data.dao.models.Driver;
 
+import java.util.List;
+
 public interface DriversDAO {
 
     void create(Driver driver);
@@ -11,5 +13,7 @@ public interface DriversDAO {
     void update(Driver driver);
 
     void delete(Driver driver);
+
+    List<Driver> readAll();
 
 }

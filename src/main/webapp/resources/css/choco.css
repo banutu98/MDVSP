@@ -1,0 +1,26 @@
+#scheduleTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#chocoTable td, #chocoTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#chocoTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#chocoTable tr:hover {
+    background-color: #ddd;
+}
+
+#chocoTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: darkmagenta;
+    color: white;
+}
