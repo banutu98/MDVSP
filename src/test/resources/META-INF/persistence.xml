@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="MDVSPTestUnit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <non-jta-data-source>java:comp/env/jdbc/mdvsp</non-jta-data-source>
+        <class>data.entities.UsersEntity</class>
+        <class>data.entities.AssociationsEntity</class>
+        <class>data.entities.DepotsEntity</class>
+        <class>data.entities.LocationsEntity</class>
+        <class>data.entities.TripsEntity</class>
+        <class>data.entities.DriversEntity</class>
+        <class>data.entities.CustomersEntity</class>
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
