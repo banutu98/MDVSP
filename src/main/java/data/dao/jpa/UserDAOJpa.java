@@ -36,4 +36,12 @@ public class UserDAOJpa extends BaseDAOJpa implements UserDAO {
         em.close();
         return user;
     }
+
+    public UserDAOJpa(String persistenceUnit) {
+        super(persistenceUnit);
+    }
+
+    public UserDAOJpa() {
+        super();
+    }
 }

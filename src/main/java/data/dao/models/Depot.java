@@ -1,5 +1,8 @@
 package data.dao.models;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Depot {
 
     private int id;
@@ -43,4 +46,5 @@ public class Depot {
 
     public Depot() {
     }
+
 }

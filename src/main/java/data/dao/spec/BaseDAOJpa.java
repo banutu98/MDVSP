@@ -2,6 +2,7 @@ package data.dao.spec;
 
 import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
+import presentation.backingBeans.SessionBean;
 
 import javax.persistence.*;
 import java.sql.Connection;
@@ -17,6 +18,10 @@ public abstract class BaseDAOJpa extends BaseDAO {
         emf = Persistence.createEntityManagerFactory("MDVSPUnit");
     }
 
+    public BaseDAOJpa(String persistenceUnit){
+        emf = Persistence.createEntityManagerFactory(persistenceUnit);
+    }
+
     public EntityManager getEntityManager() {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -24,7 +29,10 @@ public abstract class BaseDAOJpa extends BaseDAO {
         session.doWork(new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                setSchema(connection, getSessionBean().getUserName());
+                SessionBean sessionBean = getSessionBean();
+                if (sessionBean != null) {
+                    setSchema(connection, sessionBean.getUserName());
+                }
             }
         });
 

@@ -107,4 +107,12 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
         em.getTransaction().commit();
         em.close();
     }
+
+    public AssociationDAOJpa(String persistenceUnit) {
+        super(persistenceUnit);
+    }
+
+    public AssociationDAOJpa() {
+        super();
+    }
 }

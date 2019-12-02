@@ -99,4 +99,12 @@ public class LocationDAOJpa extends BaseDAOJpa implements LocationDAO {
         }
         return 0;
     }
+
+    public LocationDAOJpa(String persistenceUnit) {
+        super(persistenceUnit);
+    }
+
+    public LocationDAOJpa() {
+        super();
+    }
 }

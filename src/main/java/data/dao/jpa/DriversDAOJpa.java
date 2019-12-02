@@ -70,4 +70,12 @@ public class DriversDAOJpa extends BaseDAOJpa implements DriversDAO {
         em.close();
         return drivers;
     }
+
+    public DriversDAOJpa(String persistenceUnit) {
+        super(persistenceUnit);
+    }
+
+    public DriversDAOJpa() {
+        super();
+    }
 }

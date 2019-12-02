@@ -98,4 +98,12 @@ public class TripDAOJpa extends BaseDAOJpa implements TripDAO {
         }
         return 0;
     }
+
+    public TripDAOJpa(String persistenceUnit) {
+        super(persistenceUnit);
+    }
+
+    public TripDAOJpa() {
+        super();
+    }
 }
