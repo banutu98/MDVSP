@@ -69,4 +69,12 @@ public class CustomersDAOJpa extends BaseDAOJpa implements CustomersDAO {
         em.close();
         return customers;
     }
+
+    public CustomersDAOJpa(String persistenceUnit) {
+        super(persistenceUnit);
+    }
+
+    public CustomersDAOJpa() {
+        super();
+    }
 }

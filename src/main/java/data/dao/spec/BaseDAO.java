@@ -14,8 +14,11 @@ public abstract class BaseDAO {
     protected SessionBean getSessionBean() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
-        return (SessionBean) facesContext.getApplication()
-                .createValueBinding("#{sessionBean}").getValue(facesContext);
+        if (facesContext != null) {
+            return (SessionBean) facesContext.getApplication()
+                    .createValueBinding("#{sessionBean}").getValue(facesContext);
+        }
+        return null;
     }
 
     protected void setSchema(Connection connection, String name) {
