@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<head>
+    <title>#{label['searchResult']}</title>
+</head>
+<body>
+    <p:dataTable var="trip" value="#{searchResult.entities}">
+        <p:column headerText="#{label['id']}">
+            <h:outputText value="#{trip.tripId}"/>
+        </p:column>
+        <p:column headerText="#{label['startingTimeFilter']}">
+            <h:outputText value="#{trip.startTime}"/>
+        </p:column>
+        <p:column headerText="#{label['duration']}">
+            <h:outputText value="#{trip.duration}"/>
+        </p:column>
+    </p:dataTable>
+</body>
+</html>
