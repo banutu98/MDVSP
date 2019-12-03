@@ -18,4 +18,8 @@ public class MenuBean {
     public String goToSchedule() {
         return "schedule";
     }
+
+    public String goToSearch(){
+        return "search";
+    }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+    <title>#{label['search']}</title>
+</h:head>
+<body>
+<h:form>
+    <p:outputPanel>
+        <p:selectManyCheckbox id="custom" value="#{search.selectedFilters}" layout="custom">
+            <f:selectItem itemLabel="#{label['customerNameFilter']}" itemValue="name"/>
+            <f:selectItem itemLabel="#{label['locationFilter']}" itemValue="location"/>
+            <f:selectItem itemLabel="#{label['startingTimeFilter']}" itemValue="time"/>
+        </p:selectManyCheckbox>
+        <div class="ui-grid ui-grid-responsive">
+            <div class="ui-grid-row">
+                <div>
+                    <p:checkbox id="opt1" for="custom" itemIndex="0"/>
+                    <h:outputLabel for="opt1" value="#{label['customerNameFilter']}"/>
+                    <p:inputText for="opt1" value="#{search.name}"/>
+                </div>
+            </div>
+            <br/>
+            <div class="ui-grid-row">
+                <div>
+                    <p:checkbox id="opt2" for="custom" itemIndex="1"/>
+                    <h:outputLabel for="opt2" value="#{label['locationFilter']}"/>
+                    <p:outputLabel for="opt2" value=" X : "/>
+                    <p:inputNumber for="opt2" value="#{search.locationX}"/>
+                    <p:outputLabel for="opt2" value=" Y : "/>
+                    <p:inputNumber for="opt2" value="#{search.locationY}"/>
+                </div>
+            </div>
+            <br/>
+            <div class="ui-grid-row">
+                <div>
+                    <p:checkbox id="opt3" for="custom" itemIndex="2"/>
+                    <h:outputLabel for="opt3" value="#{label['startingTimeFilter']}"/>
+                    <pe:timePicker for="opt3" value="#{search.time}" widgetVar="spinnerTimeWidget"/>
+                </div>
+            </div>
+        </div>
+    </p:outputPanel>
+    <br/><br/>
+    <p:commandButton value="#{label['search']}" action="#{search.searchListener}"/>
+</h:form>
+</body>
+</html>
