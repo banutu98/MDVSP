@@ -33,9 +33,12 @@ public class LoginBean {
 
 
     public String login() {
-        UserDAO userDAO = new UserDAOJpa();
+        UserDAO userDAO = getSessionBean().getUserDAO();
 
+        long startTime = System.nanoTime();
         User user = userDAO.findByName(name);
+        long elapsedTime = System.nanoTime() - startTime;
+        System.out.println(elapsedTime);
 
         if (pass.equals(user.getPass())) {
             getSessionBean().setUserName(name);

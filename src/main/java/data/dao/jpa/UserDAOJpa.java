@@ -4,9 +4,15 @@ import data.dao.models.User;
 import data.dao.spec.BaseDAOJpa;
 import data.dao.spec.UserDAO;
 import data.entities.UsersEntity;
+import net.sf.ehcache.CacheManager;
 import org.modelmapper.ModelMapper;
 
+import javax.persistence.Cache;
+import javax.persistence.CacheRetrieveMode;
 import javax.persistence.EntityManager;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class UserDAOJpa extends BaseDAOJpa implements UserDAO {
     @Override
@@ -24,6 +30,10 @@ public class UserDAOJpa extends BaseDAOJpa implements UserDAO {
     @Override
     public User findByName(String name) {
         EntityManager em = getEntityManager();
+        Cache cache = em.getEntityManagerFactory().getCache();
+        if(cache.contains(UsersEntity.class, name)){
+            System.out.println("User was taken from second-level cache");
+        }
         em.getTransaction().begin();
         UsersEntity usersEntity = em.find(UsersEntity.class, name);
         if(usersEntity == null){
