@@ -9,6 +9,7 @@ import data.dao.spec.UserDAO;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "signup")
 @ViewScoped
@@ -44,7 +45,7 @@ public class SignUpBean {
 
     public String submit() {
         if (firstPass.equals(secondPass)) {
-            UserDAO userDAO = new UserDAOJpa();
+            UserDAO userDAO = getSessionBean().getUserDAO();
             User user = userDAO.findByName(name);
             if (name.equals(user.getName())) {
                 return "userExists";
@@ -56,5 +57,12 @@ public class SignUpBean {
         }
 
         return "invalidPassword";
+    }
+
+    private SessionBean getSessionBean() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        return (SessionBean) facesContext.getApplication()
+                .createValueBinding("#{sessionBean}").getValue(facesContext);
     }
 }

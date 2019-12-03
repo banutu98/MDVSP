@@ -3,6 +3,7 @@ package data.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
+@Cacheable
 @Entity
 @Table(name = "users")
 public class UsersEntity {
