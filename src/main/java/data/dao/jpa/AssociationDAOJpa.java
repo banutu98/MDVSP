@@ -13,42 +13,44 @@ import data.entities.TripsEntity;
 import data.mappers.TripMapper;
 import org.modelmapper.ModelMapper;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
+@Default
 public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
+
+    @Inject
+    private EntityManager em;
+
     @Override
     public void create(Association association) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         ModelMapper mapper = new ModelMapper();
         AssociationsEntity associationsEntity = new AssociationsEntity();
         mapper.map(association, associationsEntity);
         em.persist(associationsEntity);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public Association read(int tripId) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         AssociationsEntity associationsEntity = em.find(AssociationsEntity.class, tripId);
         ModelMapper mapper = new ModelMapper();
         Association association = new Association();
         mapper.map(association, associationsEntity);
-        em.getTransaction().commit();
-        em.close();
         return association;
     }
 
     @Override
     public List<Association> readAll() {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         TypedQuery<AssociationsEntity> query = em.createQuery("SELECT d from AssociationsEntity d", AssociationsEntity.class);
         List<AssociationsEntity> associationsEntity = query.getResultList();
         List<Association> associations = new ArrayList<>();
@@ -58,15 +60,11 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
             mapper.map(e, association);
             associations.add(association);
         }
-        em.getTransaction().commit();
-        em.close();
         return associations;
     }
 
     @Override
     public void update(Association association) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         AssociationsEntity old = em.find(AssociationsEntity.class, association.getTrip().getId());
         Trip trip = association.getTrip();
         TripsEntity tripsEntity = TripMapper.fromModelToEntity(trip);
@@ -84,32 +82,18 @@ public class AssociationDAOJpa extends BaseDAOJpa implements AssociationDAO {
         old.setEndLocation(endLocationEntity);
 
         em.persist(old);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public void delete(Association association) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         AssociationsEntity associationsEntity = em.find(AssociationsEntity.class, association.getTrip().getId());
         em.remove(associationsEntity);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public void deleteAll() {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         Query query = em.createQuery("DELETE FROM AssociationsEntity");
         query.executeUpdate();
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    public AssociationDAOJpa(String persistenceUnit) {
-        super(persistenceUnit);
     }
 
     public AssociationDAOJpa() {

@@ -1,3 +1,4 @@
+/*
 import data.dao.jpa.DepotDAOJpa;
 import data.dao.models.Depot;
 import data.dao.spec.DepotDAO;
@@ -27,7 +28,7 @@ public class JpaTester {
     }
 
     @Test
-    public void TestCrud() throws Exception {
+    public void testCrud() throws Exception {
 
         Depot depot1 = new Depot("TestDepot", 100);
         Depot depot2 = new Depot("TestDepot_2", 200);
@@ -55,7 +56,7 @@ public class JpaTester {
     }
 
     @Test
-    public void TestQueries() throws Exception {
+    public void testQueries() throws Exception {
         EntityManager em = new DepotDAOJpa(TEST_PERSISTENCE_UNIT).getEntityManager();
         Depot initialDepot = new Depot("JPQL_Test_Depot", 300);
         depotDAO.create(initialDepot);
@@ -73,7 +74,7 @@ public class JpaTester {
     }
 
     @Test
-    public void TestCriteriaQuery() throws Exception {
+    public void testCriteriaQuery() throws Exception {
         BaseDAOJpa baseDAOJpa = new DepotDAOJpa(TEST_PERSISTENCE_UNIT);
         EntityManager em = baseDAOJpa.getEntityManager();
         Depot initialDepot = new Depot("CRITERIA_Test_Depot", 400);
@@ -102,3 +103,4 @@ public class JpaTester {
     }
 
 }
+*/

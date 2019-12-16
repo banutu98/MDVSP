@@ -5,17 +5,23 @@ import data.dao.spec.SchemaManagerDAO;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import presentation.backingBeans.SessionBean;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import java.io.*;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SchemaMaangerDAOJdbc extends BaseDAOJdbc implements SchemaManagerDAO {
+@Stateless
+public class SchemaManagerDAOJdbc extends BaseDAOJdbc implements SchemaManagerDAO {
 
     private final String scriptPath = "C:\\Users\\tatu georgian\\Desktop\\MDVSP\\src\\main\\resources\\sql\\createTables.sql";
 
     @Override
     public void createSchema(String name) {
         try (Statement stmt = connection.createStatement()) {
+            stmt.executeUpdate("DROP SCHEMA IF EXISTS " + name);
             stmt.executeUpdate("CREATE SCHEMA " + name);
             setSchema(connection, name);
             runScript();
@@ -28,5 +34,15 @@ public class SchemaMaangerDAOJdbc extends BaseDAOJdbc implements SchemaManagerDA
         Reader reader = new BufferedReader(new FileReader(scriptPath));
         //Running the script
         new ScriptRunner(connection).runScript(reader);
+    }
+
+    @PostConstruct
+    public void init(){
+        try {
+            connection = dataSource.getConnection();
+            setSchema(connection, getSessionBean().getUserName());
+        } catch (SQLException  e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -3,7 +3,7 @@
 
     <persistence-unit name="MDVSPUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <non-jta-data-source>java:comp/env/jdbc/mdvsp</non-jta-data-source>
+        <non-jta-data-source>java:jboss/datasources/mdvsp</non-jta-data-source>
         <class>data.entities.UsersEntity</class>
         <class>data.entities.AssociationsEntity</class>
         <class>data.entities.DepotsEntity</class>

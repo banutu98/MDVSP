@@ -1,15 +1,16 @@
 package presentation.backingBeans;
 
-import data.dao.jdbc.SchemaMaangerDAOJdbc;
-import data.dao.jdbc.UserDAOJdbc;
+import data.dao.jpa.ResourceProducer;
 import data.dao.jpa.UserDAOJpa;
 import data.dao.models.User;
 import data.dao.spec.SchemaManagerDAO;
 import data.dao.spec.UserDAO;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
 
 @ManagedBean(name = "signup")
 @ViewScoped
@@ -18,6 +19,12 @@ public class SignUpBean {
     private String name;
     private String firstPass;
     private String secondPass;
+
+    @EJB
+    private SchemaManagerDAO schemaManagerDAO;
+
+    @EJB
+    private UserDAO userDAO;
 
     public String getName() {
         return name;
@@ -45,18 +52,16 @@ public class SignUpBean {
 
     public String submit() {
         if (firstPass.equals(secondPass)) {
-            UserDAO userDAO = getSessionBean().getUserDAO();
             User user = userDAO.findByName(name);
             if (name.equals(user.getName())) {
                 return "userExists";
             }
             userDAO.create(new User(name, firstPass));
-            SchemaManagerDAO schemaManagerDAO = new SchemaMaangerDAOJdbc();
             schemaManagerDAO.createSchema(name);
-            return "login";
+            return "login?faces-redirect=true";
         }
 
-        return "invalidPassword";
+        return "invalidPassword?faces-redirect=true";
     }
 
     private SessionBean getSessionBean() {
@@ -64,5 +69,9 @@ public class SignUpBean {
 
         return (SessionBean) facesContext.getApplication()
                 .createValueBinding("#{sessionBean}").getValue(facesContext);
+    }
+
+    public SignUpBean(){
+        getSessionBean().setUserName("default_schema");
     }
 }
