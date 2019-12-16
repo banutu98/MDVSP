@@ -10,6 +10,9 @@ import data.dao.models.Trip;
 import data.dao.spec.DepotDAO;
 import data.dao.spec.TripDAO;
 
+import javax.ejb.EJB;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;

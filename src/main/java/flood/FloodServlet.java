@@ -28,7 +28,7 @@ public class FloodServlet extends HttpServlet {
         String method = servletContext.getInitParameter("connMethod");
         if(method.equals("ConnectionPool")) {
             Context context = new InitialContext();
-            DataSource ds = (DataSource) context.lookup("java:/comp/env/jdbc/mdvsp");
+            DataSource ds = (DataSource) context.lookup("java:jboss/datasources/mdvsp");
             return ds.getConnection();
         }
         return DatabaseConnection.getInstance().getConn();

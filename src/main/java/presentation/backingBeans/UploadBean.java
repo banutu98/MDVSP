@@ -10,6 +10,7 @@ import data.dao.spec.DepotDAO;
 import data.dao.spec.TripDAO;
 import org.primefaces.model.UploadedFile;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.BufferedReader;
@@ -23,6 +24,12 @@ import java.util.List;
 @ManagedBean(name = "uploadBean")
 @ViewScoped
 public class UploadBean {
+
+    @EJB
+    private DepotDAO depotDAO;
+
+    @EJB
+    private TripDAO tripDAO;
 
     private UploadedFile file;
 
@@ -63,9 +70,6 @@ public class UploadBean {
                 int minutes = Integer.parseInt(halves[1].split(":")[1]);
                 tripList.add(new Trip(LocalTime.of(hour, minutes), duration));
             }
-
-            DepotDAO depotDAO = new DepotDAOJpa();
-            TripDAO tripDAO = new TripDAOJpa();
 
             for (Depot depot : depotList) {
                 depotDAO.create(depot);

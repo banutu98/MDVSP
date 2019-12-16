@@ -7,18 +7,23 @@ import data.dao.models.Depot;
 import data.dao.models.Trip;
 import data.dao.jdbc.DepotDAOJdbc;
 import data.dao.jdbc.TripDAOJdbc;
-import javafx.util.Pair;
 import data.dao.spec.TripDAO;
 import data.dao.spec.DepotDAO;
 
+import javax.ejb.EJB;
 import java.util.*;
 
 public class GreedySolver implements SolverStrategy {
+
+    @EJB
+    private DepotDAO depotDao;
+
+    @EJB
+    private TripDAO tripDao;
+
     @Override
     public List<Pair<Trip, Depot>> solve() {
         List<Pair<Trip, Depot>> result = new ArrayList<>();
-        TripDAO tripDao = new TripDAOJpa();
-        DepotDAO depotDao = new DepotDAOJpa();
         Queue<Trip> tripsPriority = new PriorityQueue<Trip>(100, new Comparator<Trip>() {
             @Override
             public int compare(Trip trip, Trip t1) {

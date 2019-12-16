@@ -1,18 +1,20 @@
 package business;
 
-import data.dao.jdbc.AssociationDAOJdbc;
 import data.dao.jpa.AssociationDAOJpa;
 import data.dao.models.Association;
 import data.dao.models.Depot;
 import data.dao.models.Trip;
 import data.dao.spec.AssociationDAO;
-import javafx.util.Pair;
 
+import javax.ejb.EJB;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class TabuSolver implements SolverStrategy {
+
+    @EJB
+    private AssociationDAO associationDAO;
 
     private double getFitness(List<Pair<Trip, Depot>> candidate, double[][] costGraph) {
         double cost = 0;
@@ -71,7 +73,6 @@ public class TabuSolver implements SolverStrategy {
     }
 
     private double[][] initGraph() {
-        AssociationDAO associationDAO = new AssociationDAOJpa();
         List<Association> associations = associationDAO.readAll();
         double[][] graph = new double[associations.size() + 1][associations.size() + 1];
         for (int i = 0; i < associations.size(); i++)

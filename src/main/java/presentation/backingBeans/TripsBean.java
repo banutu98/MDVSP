@@ -1,7 +1,6 @@
 package presentation.backingBeans;
 
 
-import data.dao.jpa.AssociationDAOJpa;
 import data.dao.jpa.LocationDAOJpa;
 import data.dao.jpa.TripDAOJpa;
 import data.dao.models.Association;
@@ -12,6 +11,7 @@ import data.dao.spec.LocationDAO;
 import data.dao.spec.TripDAO;
 
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.time.LocalTime;
@@ -26,6 +26,15 @@ public class TripsBean {
     private List<Date> endTimes;
     private List<Location> startLocations;
     private List<Location> endLocations;
+
+    @EJB
+    private AssociationDAO associationDAO;
+
+    @EJB
+    private LocationDAO locationDAO;
+
+    @EJB
+    private TripDAO tripDAO;
 
     public TripsBean() {
         trips = new ArrayList<>();
@@ -97,7 +106,6 @@ public class TripsBean {
     }
 
     public String submitListener() {
-        TripDAO tripDAO = new TripDAOJpa();
         Calendar calendar = GregorianCalendar.getInstance();
         for (int i = 0; i < trips.size(); i++) {
             calendar.setTime(startTimes.get(i));
@@ -110,7 +118,6 @@ public class TripsBean {
             trips.get(i).setDuration((int) duration);
             tripDAO.create(trips.get(i));
         }
-        LocationDAO locationDAO = new LocationDAOJpa();
 
         for (Location startLocation : startLocations) {
             locationDAO.create(startLocation);
@@ -120,7 +127,7 @@ public class TripsBean {
             locationDAO.create(endLocation);
         }
 
-        AssociationDAO associationDAO = new AssociationDAOJpa();
+
         for (int i = 0; i < trips.size(); i++) {
             Association association = new Association();
             trips.get(i).setId(tripDAO.getId(trips.get(i)));

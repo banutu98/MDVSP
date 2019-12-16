@@ -9,9 +9,11 @@ import data.entities.CustomersEntity;
 import data.entities.LocationsEntity;
 import data.entities.TripsEntity;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -31,6 +33,9 @@ public class SearchBean {
     private double locationX;
     private double locationY;
     private Date time;
+
+    @Inject
+    private EntityManager em;
 
     public String[] getSelectedFilters() {
         return selectedFilters;
@@ -73,8 +78,6 @@ public class SearchBean {
     }
 
     public String searchListener() {
-        TripDAOJpa tripDAO = new TripDAOJpa();
-        EntityManager em = tripDAO.getEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<TripsEntity> criteriaQuery = cb.createQuery(TripsEntity.class);
         Root<TripsEntity> fromTrips = criteriaQuery.from(TripsEntity.class);

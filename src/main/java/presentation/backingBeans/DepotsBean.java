@@ -6,6 +6,7 @@ import data.dao.models.*;
 import data.dao.spec.*;
 
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.time.LocalTime;
@@ -18,6 +19,9 @@ import java.util.List;
 public class DepotsBean {
 
     private List<Depot> depots;
+
+    @EJB
+    private DepotDAO depotDAO;
 
     public void addListener() {
         depots.add(new Depot());
@@ -43,7 +47,6 @@ public class DepotsBean {
     }
 
     public String submitListener() {
-        DepotDAO depotDAO = new DepotDAOJpa();
         for (Depot depot : depots) {
             depotDAO.create(depot);
         }

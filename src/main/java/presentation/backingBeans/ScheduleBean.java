@@ -1,10 +1,10 @@
 package presentation.backingBeans;
 
 import business.GreedySolver;
+import business.Pair;
 import business.TabuSolver;
 import data.dao.models.Depot;
 import data.dao.models.Trip;
-import javafx.util.Pair;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

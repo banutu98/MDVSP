@@ -7,55 +7,45 @@ import data.entities.CustomersEntity;
 import data.mappers.CustomerMapper;
 import org.modelmapper.ModelMapper;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
+@Default
 public class CustomersDAOJpa extends BaseDAOJpa implements CustomersDAO {
+
+    @Inject
+    private EntityManager em;
 
     @Override
     public void create(Customer customer) {
-        persistToDatabase(customer);
-    }
-
-    private void persistToDatabase(Customer customer) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         em.persist(CustomerMapper.fromModelToEntity(customer));
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public Customer read(int id) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         CustomersEntity customersEntity = em.find(CustomersEntity.class, id);
-        Customer customer = CustomerMapper.fromEntityToModel(customersEntity);
-        em.getTransaction().commit();
-        em.close();
-        return customer;
+        return CustomerMapper.fromEntityToModel(customersEntity);
     }
 
     @Override
     public void update(Customer customer) {
-        persistToDatabase(customer);
+        em.persist(CustomerMapper.fromModelToEntity(customer));
     }
 
     @Override
     public void delete(Customer customer) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         em.remove(em.find(CustomersEntity.class, customer.getCustomerId()));
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public List<Customer> readAll() {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
         TypedQuery<CustomersEntity> query = em.createQuery("SELECT d from CustomersEntity d", CustomersEntity.class);
         List<CustomersEntity> customersEntity = query.getResultList();
         List<Customer> customers = new ArrayList<>();
@@ -65,13 +55,7 @@ public class CustomersDAOJpa extends BaseDAOJpa implements CustomersDAO {
             mapper.map(e, customer);
             customers.add(customer);
         }
-        em.getTransaction().commit();
-        em.close();
         return customers;
-    }
-
-    public CustomersDAOJpa(String persistenceUnit) {
-        super(persistenceUnit);
     }
 
     public CustomersDAOJpa() {
