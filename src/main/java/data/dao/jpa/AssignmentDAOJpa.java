@@ -25,6 +25,7 @@ public class AssignmentDAOJpa extends BaseDAOJpa implements AssignmentDAO {
         entity.setDriverId(driverId);
         entity.setTripId(tripId);
         em.persist(entity);
+        em.flush();
     }
 
     @Override
