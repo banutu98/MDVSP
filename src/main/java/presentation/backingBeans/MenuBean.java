@@ -22,4 +22,8 @@ public class MenuBean {
     public String goToSearch(){
         return "search";
     }
+
+    public String goToAssign(){
+        return "assign";
+    }
 }

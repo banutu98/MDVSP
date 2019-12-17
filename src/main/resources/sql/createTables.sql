@@ -47,3 +47,30 @@ CREATE TABLE IF NOT EXISTS drivers_requests(
   CONSTRAINT driver_ref FOREIGN KEY (driver_id) REFERENCES drivers(driver_id),
   CONSTRAINT customer_ref FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
+
+CREATE TABLE IF NOT EXISTS assignments(
+  driver_id INT NOT NULL,
+  trip_id INT NOT NULL,
+  UNIQUE KEY(driver_id, trip_id)
+);
+
+-- @DELIMITER $$
+CREATE TRIGGER before_assignment_insert BEFORE INSERT ON assignments FOR EACH ROW
+BEGIN
+  DECLARE num INT;
+  SELECT COUNT(*) FROM assignments WHERE trip_id = new.trip_id INTO num;
+  IF num > 0 THEN
+    SIGNAL SQLSTATE '45000' set message_text = 'Trip assigned to multiple drivers';
+  end if;
+END;
+$$
+-- @DELIMITER ;
+
+INSERT INTO a.trips(duration, start_time) values (30, '10:30');
+INSERT INTO a.trips(duration, start_time) values (60, '11:00');
+INSERT INTO a.drivers(name, car_model) values ('Gigel', 'Audi');
+INSERT INTO a.drivers(name, car_model) values ('Alin', 'Audi');
+
+SELECT * FROM a.trips;
+SELECT * FROM a.drivers;
+SELECT * FROM a.assignments;

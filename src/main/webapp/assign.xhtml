@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Assign</title>
+</h:head>
+<body>
+    <h:form id="assignForm">
+        <p:outputLabel value="driver id : "/>
+        <p:inputNumber value="#{assign.driverId}" decimalPlaces="0"/><br/><br/>
+        <ui:repeat value="#{assign.tripIds}" var="tripId" varStatus="status">
+            <p:outputLabel value="#{'trip id '.concat(status.index).concat(' : ')}"/>
+            <p:inputNumber value="#{assign.tripIds[status.index]}" decimalPlaces="0" converter="javax.faces.Integer"/>
+            <br/>
+        </ui:repeat>
+        <br/>
+        <p:commandButton value="Add" action="#{assign.add}" update="assignForm"/><br/><br/>
+        <p:commandButton value="Remove" action="#{assign.remove}" update="assignForm"/><br/><br/>
+        <p:commandButton value="Submit" action="#{assign.submit}"/>
+    </h:form>
+</body>
+</html>
