@@ -58,7 +58,19 @@ CREATE TABLE IF NOT EXISTS assignments(
 CREATE TRIGGER before_assignment_insert BEFORE INSERT ON assignments FOR EACH ROW
 BEGIN
   DECLARE num INT;
+  DECLARE trip_num INT;
+  DECLARE driver_num INT;
   SELECT COUNT(*) FROM assignments WHERE trip_id = new.trip_id INTO num;
+  SELECT COUNT(*) FROM trips WHERE trip_id = new.trip_id INTO trip_num;
+  SELECT COUNT(*) FROM drivers WHERE drivers.driver_id = new.driver_id INTO driver_num;
+  IF trip_num != 1 THEN
+    set @message_text =  CONCAT('Invalid trip id ', new.trip_id);
+    SIGNAL SQLSTATE '45000' set message_text = @message_text;
+  end if;
+  IF driver_num != 1 THEN
+    set @message_text =  CONCAT('Invalid driver id ', new.driver_id);
+    SIGNAL SQLSTATE '45000' set message_text = @message_text;
+  end if;
   IF num > 0 THEN
     SIGNAL SQLSTATE '45000' set message_text = 'Trip assigned to multiple drivers';
   end if;
