@@ -4,6 +4,7 @@ import data.dao.jpa.ResourceProducer;
 import data.dao.jpa.UserDAOJpa;
 import data.dao.models.User;
 import data.dao.spec.UserDAO;
+import ejb.ScheduleStatusBean;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -19,6 +20,9 @@ public class LoginBean {
 
     @EJB
     private UserDAO userDAO;
+
+    @EJB
+    private ScheduleStatusBean scheduleStatusBean;
 
     public String getName() {
         return name;
@@ -45,6 +49,7 @@ public class LoginBean {
 
         if (pass.equals(user.getPass())) {
             getSessionBean().setUserName(name);
+            scheduleStatusBean.init();
             return "upload";
         }
 

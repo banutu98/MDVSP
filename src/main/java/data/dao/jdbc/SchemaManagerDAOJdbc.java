@@ -19,12 +19,14 @@ public class SchemaManagerDAOJdbc extends BaseDAOJdbc implements SchemaManagerDA
     private final String scriptPath = "C:\\Users\\tatu georgian\\Desktop\\MDVSP\\src\\main\\resources\\sql\\createTables.sql";
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void createSchema(String name) {
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("DROP SCHEMA IF EXISTS " + name);
             stmt.executeUpdate("CREATE SCHEMA " + name);
             setSchema(connection, name);
             runScript();
+            connection.commit();
         } catch (SQLException | FileNotFoundException e) {
             e.printStackTrace();
         }
